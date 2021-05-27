@@ -1,0 +1,24 @@
+@import '../var/defaults';
+
+.header {
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+    h1 {
+        align-self: flex-start;
+        flex: 1;
+        .logo {
+            cursor: pointer;
+        }
+    }
+
+    .navbar {
+        padding: $grid-gutter-width / 2;
+        a {
+            padding: $grid-gutter-width / 4;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+// Override default variables before the import
+$dark-theme: false !default;
+
+$body-bg: #f9f9f9;
+$default-bg: #ffffff;
+$header-bg: #ffffff;
+$header-shadow: #dddddd;
+$default-bg: $body-bg;
+$inverse-bg: #222222;
+$overlay-color: #000000;
+$text-color: #222222;
+$text-inverse: #eeeeee;
+$headings-color: #222222;
+$modal-content-bg: #fafafa;
+$modal-header-border-color: #dddddd;
+$modal-footer-border-color: #dddddd;
+$link-color: #03a1da;
+$yellow: #ffffcc;
+$dark: #111111;
+$hamburger-layer-color: #fff;
+
+@if $dark-theme {
+	$body-bg: #222222;
+	$default-bg: #222222;
+	$header-bg: #222222;
+	$header-shadow: #333333;
+	$default-bg: $body-bg;
+	$inverse-bg: #ffffff;
+	$overlay-color: #000000;
+	$text-color: #ffffff;
+	$text-inverse: #000000;
+	$headings-color: #ffffff;
+	$modal-content-bg: #222222;
+	$modal-header-border-color: #555555;
+	$modal-footer-border-color: #555555;
+	$link-color: #ffffff;
+	$yellow: #ffffcc;
+	$dark: #111111;
+	$hamburger-layer-color: #fff;
+}
+
+
+$primary: #03a1da;
+$danger: #c00;
+
+$hamburger-layer-color: $primary;
+$hamburger-hover-use-filter: true;
+
+$grid-gutter-width: 4rem;
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 720px,
+	md: 960px,
+	lg: 1280px,
+	xl: 1921px,
+) !default;
+
+
+$container-max-widths: (
+	sm: 720px,
+	md: 960px,
+	lg: 1250px,
+	xl: 1360px,
+) !default;
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}

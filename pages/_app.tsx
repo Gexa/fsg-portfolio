@@ -3,6 +3,8 @@ import Layout from '../components/Layout/Layout';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '../store';
 
+import '../assets/scss/globals.scss';
+
 function MyApp({ Component, pageProps }) {
 	return (
 		<ReduxProvider store={store}>

@@ -1,0 +1,30 @@
+@import '../var/defaults';
+
+.Error404Page {
+    animation: fadeIn 0.5s ease-in;
+    margin: 10vh auto;
+    color: $headings-color;
+    text-align: center;
+    background: #eeeeee;
+    @if $dark-theme {
+        background: #333333;
+    }
+    padding: 10vh 0;
+
+    h1 {
+        font-size: 4rem;
+        text-align: center;
+        margin: 0;
+        font-weight: lighter;
+        text-transform: uppercase;
+        > span {
+            font-weight: normal;
+            font-size: 5rem;
+            color: $primary;
+        }
+    }
+
+    p {
+        font-style: italic;
+    }
+}
