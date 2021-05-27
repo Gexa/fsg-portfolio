@@ -14,9 +14,17 @@ const Header:React.FunctionComponent = (props?: any): JSX.Element => {
                 </Link>
             </h1>
             <nav className={styles.navbar}>
-                <Link href="/developers/prof-1">Profil 1</Link>
-                <Link href="/developers/prof-2">Profil 2</Link>
-                <Link href="/developers/prof-3">Profil 3</Link>
+                <ul>
+                    <li>
+                        <Link href="/developers/prof-1">Profil 1</Link>
+                    </li>
+                    <li>
+                        <Link href="/developers/prof-2">Profil 2</Link>
+                    </li>
+                    <li>
+                        <Link href="/developers/prof-3">Profil 3</Link>
+                    </li>
+                </ul>
             </nav>
         </header>
     )
