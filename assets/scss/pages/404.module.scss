@@ -15,7 +15,7 @@
         text-transform: uppercase;
         > span {
             font-size: 8rem;
-            color: white;
+            color: $primary;
             @if $dark-theme {
                 color: $primary;
             }
