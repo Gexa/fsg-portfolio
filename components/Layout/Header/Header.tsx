@@ -6,15 +6,23 @@ import Link from 'next/link';
 import styles from '../../../assets/scss/components/Header.module.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { pages as routeMap } from '../../../lib/pages/';
+import { routes as routeMap } from '../../../lib/routes';
 
 const Header: React.FunctionComponent = (props?: any): JSX.Element => {
 
     const router = useRouter();
     const [activeMenu, setActiveMenu] = useState('');
+    const [activeSubMenu, setActiveSubMenu] = useState('');
 
     useEffect(() => {
-        setActiveMenu(router.asPath);
+        const splittedPath = router.asPath.split('/').filter( pth => {
+            if (pth.length > 0) {
+                return pth;
+            }
+        });
+
+        setActiveMenu(splittedPath.length > 0 ? `/${splittedPath[0]}` : '/');
+        setActiveSubMenu(splittedPath.length > 1 ? `/${splittedPath[1]}` : '');
     }, [router.asPath])
 
     return (
@@ -29,11 +37,21 @@ const Header: React.FunctionComponent = (props?: any): JSX.Element => {
             <nav className={styles.navbar}>
                 <ul>
                     {routeMap.map((menuItem, index) => {
+                        const submenu = menuItem.sub && menuItem.sub.map( (subItem, subIndex) => {
+                            return (
+                                <li key={index + '_' + subIndex}>
+                                    <Link href={menuItem.url + subItem.url}>
+                                        <a className={activeSubMenu === subItem.url ? styles.activeSub : ''}>{subItem.title}</a>
+                                    </Link>
+                                </li>
+                            )
+                        })
                         return (
                             <li key={index}>
                                 <Link href={menuItem.url}>
                                     <a className={activeMenu === menuItem.url ? styles.active : ''}>{menuItem.title}</a>
                                 </Link>
+                                {submenu ? <ul>{submenu}</ul> : null}
                             </li>
                         )
                     })}
