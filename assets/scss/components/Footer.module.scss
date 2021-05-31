@@ -43,11 +43,37 @@ svg.wave {
         }
 
         > .quoteWrapper {
-            &::before {
-                content: '"';
+            max-width: 40%;
+            font-size: 1.2rem;
+            line-height: 2.2rem;
+            color: $text-muted;
+            text-align: right;
+            padding: $grid-gutter-width;
+            opacity: 0.6;
+
+            > strong {
+                display: block;
             }
-            &::after {
-                content: '"';
+
+            > em {
+                margin-bottom: math.div($grid-gutter-width, 4);
+                display: block;
+                @mixin useSameFont {
+                    color: $text-muted;
+                    font-size: 2rem;
+                    font-family: Helvetica;
+                    padding: 0 5px;
+                    line-height: 1.8rem;
+                }
+
+                &::before {
+                    content: '„';
+                    @include useSameFont;
+                }
+                &::after {
+                    content: '”';
+                    @include useSameFont;
+                }
             }
         }
     }
