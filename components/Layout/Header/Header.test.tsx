@@ -5,7 +5,8 @@ import Header from './Header';
 import { findByTestAttr } from '../../../lib/test/utils';
 import { shallow } from 'enzyme';
 
-const setup = (props:object = {}) => shallow(<Header {...props} />);
+
+const setup = (props: object = {}) => shallow(<Header {...props} />);
 
 describe('Header', () => {
     it('should render without errors', () => {

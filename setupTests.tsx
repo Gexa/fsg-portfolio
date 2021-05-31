@@ -27,6 +27,11 @@ jest.mock('@fortawesome/react-fontawesome', () => ({
     FontAwesomeIcon: () => <span />
 }));
 
+const useRouter = jest.spyOn(require('next/router'), "useRouter");
+useRouter.mockImplementation( () => ({
+    asPath: ''
+}));
+
 type ReCapthaProps = {
     size?: any;
     onChange?: any;

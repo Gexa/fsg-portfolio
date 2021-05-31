@@ -8,7 +8,7 @@ const DynamicPage = (props) => {
         <>
             <Hero>
                 <h2>Title...</h2>
-                <p>{JSON.stringify(router)}</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In a eligendi voluptatibus? Illo, architecto sit animi deleniti consequuntur exercitationem sequi, placeat, maxime qui et magni eos adipisci aut. Inventore reprehenderit quas, similique culpa praesentium aliquid nihil expedita ex vel temporibus dolor ratione. Officiis sit nam itaque, ipsum fugiat pariatur veritatis.</p>
             </Hero>
         </>
     );

@@ -13,7 +13,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 config.autoAddCss = false;
 library.add(fas, fab);
 
-function MyApp({ Component, pageProps }) {
+function PortfolioApp({ Component, pageProps }) {
 	return (
 		<ReduxProvider store={store}>
 			<Head>
@@ -47,4 +47,4 @@ function MyApp({ Component, pageProps }) {
 	)
 }
 
-export default MyApp
+export default PortfolioApp;

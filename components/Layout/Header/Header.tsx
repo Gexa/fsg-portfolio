@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useRouter } from 'next/dist/client/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Link from 'next/link';
+
 import styles from '../../../assets/scss/components/Header.module.scss';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Header: React.FunctionComponent = (props?: any): JSX.Element => {
 
@@ -16,6 +18,11 @@ const Header: React.FunctionComponent = (props?: any): JSX.Element => {
     ];
 
     const router = useRouter();
+    const [activeMenu, setActiveMenu] = useState('');
+
+    useEffect(() => {
+        setActiveMenu(router.asPath);
+    }, [router.asPath])
 
     return (
         <header className={[styles.header, 'd-flex'].join(' ')} data-test="component-header">
@@ -28,12 +35,11 @@ const Header: React.FunctionComponent = (props?: any): JSX.Element => {
             </h1>
             <nav className={styles.navbar}>
                 <ul>
-                    {routeMap.map(menuItem => {
-                        const isActive = router && router.asPath === menuItem.url;
+                    {routeMap.map((menuItem, index) => {
                         return (
-                            <li key={menuItem.url}>
+                            <li key={index}>
                                 <Link href={menuItem.url}>
-                                    <a className={isActive ? styles.active : null}>{menuItem.title}</a>
+                                    <a className={activeMenu === menuItem.url ? styles.active : ''}>{menuItem.title}</a>
                                 </Link>
                             </li>
                         )
