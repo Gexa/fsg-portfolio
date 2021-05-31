@@ -6,16 +6,9 @@ import Link from 'next/link';
 import styles from '../../../assets/scss/components/Header.module.scss';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { pages as routeMap } from '../../../lib/pages/';
 
 const Header: React.FunctionComponent = (props?: any): JSX.Element => {
-
-    const routeMap = [
-        { url: '/', title: 'Home' },
-        { url: '/team', title: 'TEAM' },
-        { url: '/technologies', title: 'Technologies' },
-        { url: '/our-work', title: 'Our Work' },
-        { url: '/contact', title: 'Contact us' },
-    ];
 
     const router = useRouter();
     const [activeMenu, setActiveMenu] = useState('');

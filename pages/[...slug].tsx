@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import * as React from 'react';
 import Hero from '../components/Layout/Hero/Hero';
+import { pages as routeMap } from '../lib/pages/';
 
 const DynamicPage = (props) => {
     const router = useRouter();
@@ -14,7 +15,18 @@ const DynamicPage = (props) => {
     );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(req) {
+
+    const requestedUrl = req.params.slug[0];
+    const slugs = routeMap.map( page => {
+        const pageSlug = page.url.replace('/', '');
+        return pageSlug;
+    });
+    if (slugs.indexOf(requestedUrl) === -1) {
+        return {
+            notFound: true
+        }
+    }
 
     // SERVER STUFF
     return {
@@ -24,9 +36,15 @@ export async function getStaticProps() {
 }
 
 export async function getStaticPaths() {
+
+    const slugs = routeMap.map( page => {
+        const pageSlug = page.url.replace('/', '');
+        return pageSlug;
+    });
+
     return {
         paths: [
-            { params: { slug: ['team', 'our-work', 'technologies', 'contact'] } }
+            { params: { slug: slugs } }
         ],
         fallback: true
     }
