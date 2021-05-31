@@ -1,0 +1,54 @@
+@use 'sass:math';
+@import "../var/defaults";
+
+svg.wave {
+    height: 100px;
+    width: 100%;
+    path {
+        fill: $header-bg;
+    }
+    rect {
+        fill: white;
+    }
+}
+
+.footer {
+    background: $header-bg;
+    color: $text-inverse;
+    flex-shrink: 1;
+    position: relative;
+
+    > svg {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .copyright {
+        width: 100%;
+        text-align: center;
+        font-size: 0.75rem;
+        color: $text-muted;
+        padding: math.div($grid-gutter-width, 4) 0;
+    }
+
+    > .footerTop {
+        display: flex;
+        justify-content: space-between;
+
+        > .contactWrapper {
+            width: 50%;
+            min-height: 400px;
+        }
+
+        > .quoteWrapper {
+            &::before {
+                content: '"';
+            }
+            &::after {
+                content: '"';
+            }
+        }
+    }
+}

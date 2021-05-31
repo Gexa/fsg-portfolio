@@ -1,20 +1,22 @@
 // Override default variables before the import
+$font-family: Raleway;
 $dark-theme: false !default;
 
-$body-bg: #f9f9f9;
+$body-bg: #ffffff;
 $default-bg: #ffffff;
-$header-bg: #ffffff;
-$header-shadow: #dddddd;
+$header-bg: #202020;
+$header-shadow: #202020;
 $default-bg: $body-bg;
-$inverse-bg: #222222;
+$inverse-bg: #202020;
 $overlay-color: #000000;
 $text-color: #222222;
-$text-inverse: #eeeeee;
-$headings-color: #222222;
+$text-inverse: #ffffff;
+$text-muted: #CCCCCC;
+$headings-color: #000000;
 $modal-content-bg: #fafafa;
 $modal-header-border-color: #dddddd;
 $modal-footer-border-color: #dddddd;
-$link-color: #006c93;
+$link-color: #31c6eb;
 $yellow: #ffffcc;
 $dark: #111111;
 $hamburger-layer-color: #fff;
@@ -40,7 +42,7 @@ $hamburger-layer-color: #fff;
 }
 
 
-$primary: #03a1da;
+$primary: #31c6eb;
 $danger: #c00;
 
 $hamburger-layer-color: $primary;
@@ -61,7 +63,7 @@ $container-max-widths: (
 	sm: 720px,
 	md: 960px,
 	lg: 1250px,
-	xl: 1360px,
+	xl: 1440px,
 ) !default;
 
 @keyframes fadeIn {

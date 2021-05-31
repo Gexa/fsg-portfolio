@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import { findByTestAttr } from '../lib/test/utils';
 import Home from './index';
 
-const setup = () => {
-    return shallow(<Home />);
+const setup = (props?) => {
+    return shallow(<Home {...props} />);
 }
 
 describe('Home', () => {

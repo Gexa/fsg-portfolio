@@ -1,32 +1,56 @@
-@import 'var/defaults';
-@import 'var/container';
+@use "sass:math";
+
+@import "var/defaults";
+@import "var/container";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: $font-family, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
   background-color: $body-bg;
-
+  height: 100%;
+  > div:not(#portal) {
+    min-height: 100vh;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  color: $primary;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: $grid-gutter-width / 4;
-  color: $headings-color;
-}
-
-.d-flex {
+.app {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100vh;
+
+  > main {
+    flex: 1;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    color: $primary;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: math.div($grid-gutter-width, 4);
+    color: $headings-color;
+  }
+
+  .d-flex {
+    display: flex;
+  }
 }

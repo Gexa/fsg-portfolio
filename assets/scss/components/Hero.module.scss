@@ -1,0 +1,72 @@
+@use "sass:math";
+@import '../var/defaults';
+
+.Hero {
+    background: $header-bg;
+    position: relative;
+    background: $header-bg url('/bg.png');
+    background-size: cover;
+    background-blend-mode: overlay;
+    margin-bottom: -$grid-gutter-width;
+
+    @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'lg')) {
+        clip-path: url(#headerCurve);
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        opacity: .90;
+        position: absolute;
+        /* background: -moz-linear-gradient(left,  $header-bg 0%, $header-bg 50%, rgba(0,0,0,0) 100%);
+        background: -webkit-linear-gradient(left,  $header-bg 0%,$header-bg 50%,rgba(0,0,0,0) 100%); */
+        background: linear-gradient(to right,  $header-bg 0%,$header-bg 35%,rgba(0,0,0,0) 100%);
+        top: 0;
+        left: 0;
+    }
+
+    .heroWrapper {
+        height: 40vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        position: relative;
+        @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'lg')) {
+            justify-content: flex-start;
+            height: 55vh;
+            padding-top: 10%;
+        }
+
+        @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'xl')) {
+            padding-top: 7.5%
+        }
+
+        * {
+            color: $text-inverse;
+        }
+
+        .content {
+            max-width: 60%;
+            border-left: 3px solid $primary;
+            padding: math.div($grid-gutter-width, 4) math.div($grid-gutter-width, 2);
+
+            h2 {
+                padding: 0;
+                font-size: 3rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+
+            p {
+                font-size: 1.4rem;
+                font-weight: lighter;
+                line-height: 2rem;
+                margin: 1rem 0 0 0;
+            }
+        }
+
+    }
+
+}

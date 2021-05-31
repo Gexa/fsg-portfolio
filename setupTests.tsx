@@ -23,6 +23,10 @@ global.sessionStorage = {
     setItem: jest.fn(),
 }
 
+jest.mock('@fortawesome/react-fontawesome', () => ({
+    FontAwesomeIcon: () => <span />
+}));
+
 type ReCapthaProps = {
     size?: any;
     onChange?: any;
