@@ -1,5 +1,6 @@
 @use "sass:math";
 @import '../var/defaults';
+@import '../var/mixins';
 
 .header {
     width: 100%;
@@ -24,12 +25,22 @@
     .navbar {
         flex: 1;
         min-width: 60%;
+        @include media-breakpoint-down(md) {
+            flex: auto;
+            order: 1;
+            text-align: right;
+        }
+
         > ul {
+            display: none;
+            width: 100%;
+            @include media-breakpoint-up(md) {
+                display: flex;
+                width: auto;
+            }
             list-style: none;
             padding: 0;
             margin: 0;
-            width: 100%;
-            display: flex;
             justify-content: center;
 
             li {
@@ -40,12 +51,14 @@
                     display: inline-block;
                     color: $text-inverse;
                     font-weight: lighter;
+                    padding-bottom: calc(2px + 0.25rem);
 
                     &.active {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
+                        padding-bottom: 0;
 
                         &::after {
                             content: '';
@@ -96,6 +109,9 @@
         flex: auto;
         justify-self: flex-end;
         text-align: right;
+        @include media-breakpoint-down(md) {
+            min-width: 50%;
+        }
 
         a {
             padding: math.div($grid-gutter-width, 6);

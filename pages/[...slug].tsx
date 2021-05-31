@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import * as React from 'react';
 import Hero from '../components/Layout/Hero/Hero';
-import {routes as routeMap } from '../lib/routes';
+import { routes } from '../lib/routes';
 
 const DynamicPage = (props) => {
     let content = null;
@@ -9,7 +9,7 @@ const DynamicPage = (props) => {
         content = (<>
             <Hero>
                 <h2>Title...</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In a eligendi voluptatibus? Illo, architecto sit animi deleniti consequuntur exercitationem sequi, placeat, maxime qui et magni eos adipisci aut. Inventore reprehenderit quas, similique culpa praesentium aliquid nihil expedita ex vel temporibus dolor ratione. Officiis sit nam itaque, ipsum fugiat pariatur veritatis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, error earum blanditiis omnis doloribus quo dolore vero aut quia? Obcaecati?</p>
             </Hero>
         </>);
     }
@@ -19,7 +19,7 @@ const DynamicPage = (props) => {
 
 export async function getStaticProps(context) {
 
-    const { params } = context;
+    const { params } = context;
 
     if (!isUrlExists(params)) {
         return {
@@ -52,7 +52,7 @@ const getRequestUrl = (params: any): string => {
 }
 
 const extractSlugs = (): string[] => {
-    const mappedSlugs = routeMap.map( page => {
+    const mappedSlugs = routes.map(page => {
         const pageSlug = page.url.replace('/', '');
         return pageSlug;
     });

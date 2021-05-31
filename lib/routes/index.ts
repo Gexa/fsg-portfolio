@@ -1,5 +1,4 @@
 export const routes = [
-    { url: '/', title: 'Home' },
     { url: '/team', title: 'TEAM', sub: [
         { url: '/ferenc', title: 'Ferenc CV' },
         { url: '/sandor', title: 'Sándor CV' },
