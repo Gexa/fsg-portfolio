@@ -3,15 +3,31 @@
 @import '../../var/mixins';
 
 .btn {
+    cursor: pointer;
     &.primary {
         background: $primary;
         border: 0;
         margin: 0;
         padding: math.div($grid-gutter-width, 10) math.div($grid-gutter-width, 4);
+        &:hover {
+            background-color: rgba($color: $primary, $alpha: .70);
+        }
     }
 
     &.sm {
         font-size: 90%;
         padding: math.div($grid-gutter-width, 15) math.div($grid-gutter-width, 6);
+    }
+
+    &.uppercase {
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    &.lg {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: math.div($grid-gutter-width, 6) math.div($grid-gutter-width, 2);
     }
 }

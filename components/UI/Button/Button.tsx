@@ -5,9 +5,10 @@ import styles from '../../../assets/scss/components/UI/Button.module.scss';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type ButtonProps = {
-    children: string | JSX.Element;
+    children?: any;
     type?: 'button' | 'submit' | 'reset';
-    className?: string[] | string;
+    disabled?: boolean;
+    classes?: any;
     icon?: IconName;
     iconGroup?: 'fas' | 'fab';
     MouseEvents?: object;
@@ -15,20 +16,22 @@ export type ButtonProps = {
 
 const Button: React.FunctionComponent = (props?: ButtonProps): JSX.Element => {
     let recievedClassNames = [];
-    if (!props.className) {
+    if (!props.classes) {
         recievedClassNames.push(styles.primary);
     } else {
-        if (typeof props.className !== 'string') {
-            recievedClassNames = props.className.map(className => styles[className]);
+        if (typeof props.classes !== 'string') {
+            recievedClassNames = props.classes.map(className => styles[className]);
         } else {
-            recievedClassNames.push(styles[props.className]);
+            recievedClassNames.push(styles[props.classes]);
         }
     }
+    const combinedClasses = [styles.btn, ...recievedClassNames];
 
     return (
         <button type={!props.type ? 'button' : props.type}
                 data-test="component-button"
-                className={[styles.btn].concat(recievedClassNames).join(' ')}
+                className={combinedClasses.join(' ')}
+                disabled={props.disabled ? props.disabled : false}
                 {...props.MouseEvents}>
             {props.icon && <FontAwesomeIcon icon={[props.iconGroup, props.icon]} />}
             <span>{props.children}</span>

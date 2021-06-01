@@ -6,14 +6,17 @@
     border: 1px solid $primary;
     margin-bottom: math.div($grid-gutter-width, 2);
     width: 100%;
+    background: $dark;
 
     > p {
-        padding: math.div($grid-gutter-width, 4) math.div($grid-gutter-width, 2);
+        padding: math.div($grid-gutter-width, 2) math.div($grid-gutter-width, 2);
         line-height: 2rem;
         margin: 0;
         font-size: 1rem;
         color: $text-muted;
-        min-height: 200px;
+        min-height: 240px;
+        cursor: pointer;
+        background-color: $inverse-bg;
     }
 
     .input, .message {
@@ -22,17 +25,39 @@
         background-color: $inverse-bg;
         color: $text-inverse;
         border: none;
-        border-bottom: 1px solid $primary;
-        margin-bottom: math.div($grid-gutter-width, 4);
+        /* border-bottom: 1px solid $primary; */
+        border-bottom: 1px solid rgba($color: $text-muted, $alpha: 0.2);
         font-family: $font-family;
         font-size: 1rem;
+        outline: none;
         &::placeholder {
             color: $text-muted;
         }
     }
 
+
     .message {
         min-height: 100px;
         margin-bottom: 0;
+        width: 100%;
+    }
+
+    .toolbar {
+        background-color: $dark;
+        display: flex;
+        justify-content: space-between;
+        > label {
+            flex: 1;
+            font-size: 0.9rem;
+            color: $text-muted;
+            align-self: center;
+            > input {
+                margin: 0 10px;
+            }
+        }
+
+        > button {
+            align-self: center;
+        }
     }
 }
