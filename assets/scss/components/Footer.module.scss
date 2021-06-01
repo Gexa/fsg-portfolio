@@ -1,5 +1,6 @@
 @use 'sass:math';
 @import "../var/defaults";
+@import "../var/mixins";
 
 svg.wave {
     height: 100px;
@@ -35,10 +36,16 @@ svg.wave {
 
     > .footerTop {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
 
         > .contactWrapper {
-            width: 50%;
+            width: 100%;
+            padding: 0 math.div($grid-gutter-width , 2);
+            @include media-breakpoint-up(md) {
+                padding: 0;
+                width: 50%;
+            }
             min-height: 400px;
 
 
@@ -52,12 +59,16 @@ svg.wave {
         }
 
         > .quoteWrapper {
-            max-width: 40%;
+            width: 100%;
+            padding: 0 math.div($grid-gutter-width , 4) 0 0;
+            @include media-breakpoint-up(md) {
+                width: 40%;
+                padding: $grid-gutter-width * 1.75 math.div($grid-gutter-width , 4) 0 0;
+            }
             font-size: 1.2rem;
             line-height: 2.2rem;
             color: $text-muted;
             text-align: right;
-            padding: $grid-gutter-width*1.5 math.div($grid-gutter-width , 4) 0 0;
             opacity: 0.6;
 
             > strong {

@@ -5,60 +5,223 @@
 @import "var/mixins";
 
 html {
-  font-size: 14px;
-  @include media-breakpoint-up(md) {
-    font-size: 16px;
-  }
+	font-size: 14px;
+	scroll-behavior: smooth;
+	@include media-breakpoint-up(md) {
+		font-size: 16px;
+	}
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: $font-family, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-    Droid Sans, Helvetica Neue, sans-serif;
-  background-color: $body-bg;
-  height: 100%;
-  > div:not(#portal) {
-    min-height: 100vh;
-  }
+	padding: 0;
+	margin: 0;
+	font-family: $font-family, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+		Droid Sans, Helvetica Neue, sans-serif;
+	background-color: $body-bg;
+	height: 100%;
+	> div:not(#portal) {
+		min-height: 100vh;
+	}
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 100vh;
 
-  > main {
-    flex: 1;
-    min-height: 100vh;
-    overflow: visible;
-  }
+	> main {
+		flex: 1;
+		min-height: 100vh;
+		overflow: visible;
+	}
 
-  a {
-    color: inherit;
-    text-decoration: none;
-    color: $primary;
-  }
+	a {
+		color: inherit;
+		text-decoration: none;
+		color: $primary;
+	}
 
-  * {
-    box-sizing: border-box;
-  }
+	* {
+		box-sizing: border-box;
+	}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
-    padding: math.div($grid-gutter-width, 4);
-    color: $headings-color;
-  }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0;
+		padding: math.div($grid-gutter-width, 4);
+		color: $headings-color;
+	}
 
-  .d-flex {
-    display: flex;
-  }
+	.d-flex {
+		display: flex;
+	}
+}
+
+/********************************************************/
+/********************* MOBILE MENU **********************/
+/********************************************************/
+
+/* TODO: Refactor this messy sh*t */
+#navigation-overlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba($color: $overlay-color, $alpha: 0.5);
+	z-index: 99;
+	animation: fadeIn 0.4s ease-in;
+}
+
+.main-nav {
+	position: fixed;
+	top: 0;
+	right: -50vw;
+	left: auto;
+	bottom: 0;
+	text-align: center;
+	background: $header-bg;
+	opacity: 0;
+	z-index: -1;
+	visibility: hidden;
+	transition: all 0.375s;
+	overflow-x: hidden;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: -15px;
+		background: $header-bg;
+		transition: all 0.275s 0.1s;
+	}
+
+	&.is-open {
+		opacity: 1;
+		z-index: 100;
+		visibility: visible;
+		right: 0;
+		width: 75vw;
+		padding: math.div($grid-gutter-width, 2) $grid-gutter-width;
+
+		@include media-breakpoint-down(sm) {
+			width: 100vw;
+		}
+
+		.hamburger {
+			top: 15px;
+			left: 15px;
+			right: auto;
+			position: absolute;
+			z-index: 12;
+			display: block !important;
+		}
+
+		ul > li > ul {
+			display: block;
+			opacity: 1;
+			> li {
+				opacity: 1;
+				> a {
+					color: $text-muted;
+					border-bottom: 1px solid rgba($color: $text-muted, $alpha: 0.2);
+				}
+			}
+		}
+	}
+
+	/* Apparition effect on links */
+	&.is-open a {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	li:nth-child(1) a {
+		transition: all 275ms 175ms;
+	}
+
+	li:nth-child(2) a {
+		transition: all 275ms 225ms;
+	}
+
+	li:nth-child(3) a {
+		transition: all 275ms 275ms;
+	}
+
+	li:nth-child(4) a {
+		transition: all 275ms 325ms;
+	}
+
+	li:nth-child(5) a {
+		transition: all 275ms 375ms;
+	}
+
+	a {
+		opacity: 0;
+		transform: translateY(-10px);
+		display: block;
+		padding: 11px 0;
+		color: $link-color;
+		font-size: 18px;
+		text-decoration: none;
+	}
+
+	li {
+		display: block;
+		margin: 0.1rem 0;
+		text-align: center;
+		width: 100%;
+	}
+
+	> nav > ul {
+		display: inline-flex !important;
+		flex-direction: column;
+		height: 100%;
+		width: 100%;
+		align-items: flex-end;
+		justify-content: center;
+	}
+
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		li {
+			transition: all 0.2s ease-out;
+			ul {
+				display: none;
+				overflow: hidden;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				background: rgba($color: $overlay-color, $alpha: 0.03);
+				position: relative;
+				> li {
+					opacity: 0;
+					border-bottom: 1px dotted rgba($color: $overlay-color, $alpha: 0.1);
+					transition: all 0.2s ease-in;
+				}
+			}
+			&.opened {
+				background-color: rgba($color: $default-bg, $alpha: 0.1);
+				ul {
+					display: block;
+					li {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
 }

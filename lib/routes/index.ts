@@ -6,5 +6,5 @@ export const routes = [
     ] },
     { url: '/technologies', title: 'Technologies' },
     { url: '/our-work', title: 'Our Work' },
-    { url: '/contact', title: 'Contact us' },
+    { url: '#Contact', title: 'Contact us' },
 ];

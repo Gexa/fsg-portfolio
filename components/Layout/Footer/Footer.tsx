@@ -15,7 +15,7 @@ const Footer = () => {
 
                 <div className={[styles.footerTop, 'container'].join(' ')}>
 
-                    <div className={styles.contactWrapper}>
+                    <div className={styles.contactWrapper} id="Contact">
                         <h2 className={styles.contactHeader}>Contact us!</h2>
                         <Contact />
                     </div>

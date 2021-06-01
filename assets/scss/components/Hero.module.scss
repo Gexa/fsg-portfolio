@@ -1,5 +1,6 @@
 @use "sass:math";
 @import '../var/defaults';
+@import '../var/mixins';
 
 .Hero {
     background: $header-bg;
@@ -51,6 +52,11 @@
             max-width: 60%;
             border-left: 3px solid $primary;
             padding: math.div($grid-gutter-width, 4) math.div($grid-gutter-width, 2);
+            @include media-breakpoint-down(lg) {
+                max-width: 80%;
+                align-self: center;
+                justify-self: center;
+            }
 
             h2 {
                 padding: 0;

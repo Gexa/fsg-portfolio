@@ -10,6 +10,9 @@
     align-items: center;
     min-height: 80px;
     padding: 0 $grid-gutter-width;
+    @include media-breakpoint-down(md) {
+        padding: 0 math.div($grid-gutter-width, 2);
+    }
     background: $header-bg;
 
     h1 {
@@ -29,6 +32,10 @@
             flex: auto;
             order: 1;
             text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            min-width: auto;
+            justify-self: flex-end;
         }
 
         > ul {
@@ -118,5 +125,66 @@
             color: $text-muted;
             font-size: 1.2rem;
         }
+    }
+}
+
+
+.hamburger {
+    display: block;
+    background-color: transparent;
+    border: 0;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+
+    @mixin  hamburger-line {
+        display: block;
+        height: 2px;
+        background-color: $text-muted;
+        width: 100%;
+        margin: 10px 0;
+        transition: all 0.4s ease-in-out;
+    }
+
+    &::before {
+        transform-origin: top left;
+        content: '';
+        @include hamburger-line();
+    }
+
+    &::after {
+        transform-origin: bottom left;
+        content: '';
+        @include hamburger-line();
+    }
+    > span {
+        @include hamburger-line();
+    }
+
+    &:hover {
+        &::after, &::before, >span {
+            opacity: 0.80;
+            background-color: $primary;
+        }
+    }
+
+    &.active {
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+
+        >span {
+            opacity: 0;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        display: none;
     }
 }
