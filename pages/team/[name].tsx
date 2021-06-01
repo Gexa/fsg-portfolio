@@ -1,14 +1,17 @@
 import * as React from 'react';
 
-const TeamMember = (props) => {
+const TeamMember = ({ name }) => {
     return (
-        <h2>{JSON.stringify(props)}</h2>
+        <div className="container">
+            <h2>{name.toUpperCase()}</h2>
+        </div>
     )
 }
 
 export async function getStaticProps(context) {
+    const { params } = context;
     return {
-        props: {}
+        props: { name: params.name }
     }
 }
 

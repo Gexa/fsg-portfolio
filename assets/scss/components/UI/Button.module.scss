@@ -1,0 +1,17 @@
+@use 'sass:math';
+@import '../../var/defaults';
+@import '../../var/mixins';
+
+.btn {
+    &.primary {
+        background: $primary;
+        border: 0;
+        margin: 0;
+        padding: math.div($grid-gutter-width, 10) math.div($grid-gutter-width, 4);
+    }
+
+    &.sm {
+        font-size: 90%;
+        padding: math.div($grid-gutter-width, 15) math.div($grid-gutter-width, 6);
+    }
+}

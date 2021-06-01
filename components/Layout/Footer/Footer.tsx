@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import styles from '../../../assets/scss/components/Footer.module.scss';
+import Contact from '../../containers/Contact/Contact';
 
 const Footer = () => {
     return (
@@ -15,7 +16,8 @@ const Footer = () => {
                 <div className={[styles.footerTop, 'container'].join(' ')}>
 
                     <div className={styles.contactWrapper}>
-                        {/* <Contact /> */}
+                        <h2 className={styles.contactHeader}>Contact us!</h2>
+                        <Contact />
                     </div>
 
                     <blockquote className={styles.quoteWrapper}>

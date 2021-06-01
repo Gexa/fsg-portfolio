@@ -24,7 +24,7 @@ global.sessionStorage = {
 }
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
-    FontAwesomeIcon: () => <span />
+    FontAwesomeIcon: (props?) => <span {...props} />
 }));
 
 const useRouter = jest.spyOn(require('next/router'), "useRouter");
