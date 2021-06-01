@@ -7,7 +7,7 @@ export default (req, res) => {
     return;
   }
 
-  const { subject, sender, message } = req.body;
+  const { subject, sender, message, verify, terms } = req.body;
   console.log(typeof req.body);
   if (!message || htmlToText(message).trim().length < 20) {
     console.log(message);

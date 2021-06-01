@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import useComponentVisible from '../../../lib/hooks/useComponentVisible';
 import styles from '../../../assets/scss/components/Contact.module.scss';
@@ -7,7 +8,7 @@ import Button, { ButtonProps } from '../../UI/Button/Button';
 
 const Contact: React.FunctionComponent = (): JSX.Element => {
 
-    const [ contactData, setContactData ] = React.useState({ subject: '', sender: '', message: '', terms: false });
+    const [ contactData, setContactData ] = React.useState({ subject: '', sender: '', message: '', terms: false, verify: '' });
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
 
     const handleSubmit = event => {
@@ -27,7 +28,8 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
                 subject: '',
                 sender: '',
                 message: '',
-                terms: false
+                terms: false,
+                verify: ''
             });
             setIsComponentVisible(false);
         }).catch( error => {
@@ -46,6 +48,11 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
     const handleFormShow = (event) => {
         event.preventDefault();
         setIsComponentVisible(true);
+        setContactData( oldData => ({
+            ...oldData,
+            terms: false,
+            verify: ''
+        }));
     }
 
     const sendBtnProps:ButtonProps = {
@@ -61,14 +68,40 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
             data-test="component-contact">
                 {isComponentVisible ?
                 (<>
-                    <input type="text" autoFocus placeholder="Subject" autoComplete="off" className={styles.input} value={contactData.subject} onChange={e => handleChange(e, 'subject')} />
-                    <input type="email" placeholder="Contact E-mail" className={styles.input} value={contactData.sender} onChange={e => handleChange(e, 'sender')} />
-                    <textarea className={styles.message} autoComplete="off"
+                    <input type="text"
+                            autoFocus
+                            placeholder="Subject"
+                            autoComplete="off"
+                            className={styles.input}
+                            value={contactData.subject}
+                            onChange={e => handleChange(e, 'subject')}
+                        />
+
+                    <input type="email"
+                            required={true}
+                            placeholder="Contact E-mail"
+                            className={styles.input}
+                            value={contactData.sender}
+                            onChange={e => handleChange(e, 'sender')}
+                        />
+
+                    <div className={styles.withRecaptcha}>
+                        <textarea className={styles.message}
+                            autoComplete="off"
+                            required={true}
                             placeholder="Write your message here! Your message should be at least 20 characters long."
                             onChange={e => handleChange(e, 'message')}
                             value={contactData.message}></textarea>
-                    <div className={styles.toolbar}>
 
+                        <div className={styles.captcha}>
+                            <ReCAPTCHA sitekey="6LdJ5b0UAAAAAB-12UeOL5rbeWaekJw8twnofo1A"
+                                size="normal" theme="dark" onChange={(token:string) => setContactData(state => ({ ...state, verify: token }))}
+                                onExpired={() => setContactData(state => ({...state, verify: ''}))}
+                            />
+                        </div>
+                    </div>
+
+                    <div className={styles.toolbar}>
                         <label htmlFor="acceptTerms">
                             <input type="checkbox"
                                     id="acceptTerms"
@@ -79,7 +112,7 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
                             I've read and understand the <Link href="/policy">Privacy Policy</Link>
                         </label>
 
-                        <Button disabled={!contactData.terms} {...sendBtnProps}>Send</Button>
+                        <Button disabled={!contactData.terms || contactData.verify === ''} {...sendBtnProps}>Send</Button>
                     </div>
                 </>
                 )

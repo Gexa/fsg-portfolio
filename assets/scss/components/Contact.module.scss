@@ -35,11 +35,39 @@
         }
     }
 
+    .withRecaptcha {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        background-color: $inverse-bg;
 
-    .message {
-        min-height: 100px;
-        margin-bottom: 0;
-        width: 100%;
+        .message {
+            min-height: 100px;
+            margin-bottom: 0;
+            width: 100%;
+            flex: 1;
+            border-right: 1px solid rgba($color: $text-muted, $alpha: 0.2);;
+
+            @include media-breakpoint-up(md) {
+                width: 50%;
+            }
+        }
+
+        .captcha {
+            width: 100%;
+            margin: 5px;
+            align-self: center;
+            justify-self: center;
+            overflow: hidden;
+            @include media-breakpoint-up(md) {
+                max-width: 50%;
+                padding: 10px;
+            }
+
+            * { border: none; margin: 0 auto; }
+        }
+
     }
 
     .toolbar {
