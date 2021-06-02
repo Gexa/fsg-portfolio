@@ -5,18 +5,16 @@ import Link from 'next/link';
 import Navigation from './Navigation/Navigation';
 
 import styles from '../../../assets/scss/components/Header.module.scss';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { routes as routeMap } from '../../../lib/routes';
 
 const Header: React.FunctionComponent = (props?: any): JSX.Element => {
 
     const router = useRouter();
-    const [activeMenu, setActiveMenu] = useState('');
-    const [activeSubMenu, setActiveSubMenu] = useState('');
-    const [activeHamburger, setActiveHamburger] = useState(false);
+    const [activeMenu, setActiveMenu] = React.useState('');
+    const [activeSubMenu, setActiveSubMenu] = React.useState('');
+    const [activeHamburger, setActiveHamburger] = React.useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const splittedPath = router.asPath.split('/').filter(pth => {
             if (pth.length > 0) {
                 return pth;

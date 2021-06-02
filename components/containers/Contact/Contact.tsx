@@ -1,15 +1,21 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+
 import Link from 'next/link';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import useComponentVisible from '../../../lib/hooks/useComponentVisible';
-import styles from '../../../assets/scss/components/Contact.module.scss';
 import Button, { ButtonProps } from '../../UI/Button/Button';
+import useComponentVisible from '../../../lib/hooks/useComponentVisible';
+
+import { systemClearMessage, systemSetMessage } from '../../../store/actions/system';
+
+import styles from '../../../assets/scss/components/Contact.module.scss';
 
 const Contact: React.FunctionComponent = (): JSX.Element => {
 
     const [ contactData, setContactData ] = React.useState({ subject: '', sender: '', message: '', terms: false, verify: '' });
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+    const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -21,9 +27,24 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
-        }).then( response => response.json() )
+        })
+        .then( response => response.json() )
         .then( data => {
-            console.log(data);
+
+            dispatch(systemSetMessage({
+                title: 'Contact',
+                content: data.message,
+                buttons: [
+                    {
+                        caption: 'Close',
+                        classes: ['danger'],
+                        icon: 'times',
+                        onClick: () => dispatch(systemClearMessage())
+                    }
+                ],
+                closeable: true,
+            }));
+
             setContactData({
                 subject: '',
                 sender: '',
@@ -31,9 +52,23 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
                 terms: false,
                 verify: ''
             });
+
             setIsComponentVisible(false);
+
         }).catch( error => {
-            alert(error.message);
+            dispatch(systemSetMessage({
+                title: 'Mail sending error',
+                content: error.message,
+                buttons: [
+                    {
+                        caption: 'Close',
+                        classes: ['danger'],
+                        icon: 'times',
+                        onClick: () => dispatch(systemClearMessage())
+                    }
+                ],
+                closeable: true,
+            }));
         });
 
     }
@@ -112,7 +147,7 @@ const Contact: React.FunctionComponent = (): JSX.Element => {
                             I've read and understand the <Link href="/policy">Privacy Policy</Link>
                         </label>
 
-                        <Button disabled={!contactData.terms || contactData.verify === ''} {...sendBtnProps}>Send</Button>
+                        <Button disabled={!contactData.terms || contactData.verify === ''} {...sendBtnProps} caption="Send" />
                     </div>
                 </>
                 )

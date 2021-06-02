@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
-import { findByTestAttr } from '../../../lib/test/utils';
+import { mount } from 'enzyme';
+import { findByTestAttr, storeFactory } from '../../../lib/test/utils';
 
 import Contact from './Contact';
+import { Provider } from 'react-redux';
 
-const setup = () => shallow(<Contact />);
+const store = storeFactory();
+
+const setup = () => mount(<Provider store={store}><Contact /></Provider>);
 
 describe('Contact Form', () => {
     it('should render without errors', () => {

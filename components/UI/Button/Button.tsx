@@ -5,16 +5,16 @@ import styles from '../../../assets/scss/components/UI/Button.module.scss';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type ButtonProps = {
-    children?: any;
+    caption?: any;
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
     classes?: any;
     icon?: IconName;
     iconGroup?: 'fas' | 'fab';
-    MouseEvents?: object;
+    onClick?: any
 };
 
-const Button: React.FunctionComponent = (props?: ButtonProps): JSX.Element => {
+const Button: React.FunctionComponent<ButtonProps> = (props?: ButtonProps): JSX.Element => {
     let recievedClassNames = [];
     if (!props.classes) {
         recievedClassNames.push(styles.primary);
@@ -28,13 +28,13 @@ const Button: React.FunctionComponent = (props?: ButtonProps): JSX.Element => {
     const combinedClasses = [styles.btn, ...recievedClassNames];
 
     return (
-        <button type={!props.type ? 'button' : props.type}
-                data-test="component-button"
+        <button data-test="component-button"
+                type={!props.type ? 'button' : props.type}
                 className={combinedClasses.join(' ')}
                 disabled={props.disabled ? props.disabled : false}
-                {...props.MouseEvents}>
+                onClick={props.onClick && props.onClick}>
             {props.icon && <FontAwesomeIcon icon={[props.iconGroup, props.icon]} />}
-            <span>{props.children}</span>
+            {props.caption && <span>{props.caption}</span>}
         </button>
     );
 }

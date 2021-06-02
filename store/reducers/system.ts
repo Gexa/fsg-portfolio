@@ -27,7 +27,7 @@ const systemReducer = (state:SystemState = initialState, action) => {
                 ...state,
                 message: action.payload
             };
-        case actionTypes.SYSTEM_SET_MESSAGE:
+        case actionTypes.SYSTEM_CLEAR_MESSAGE:
             return { ...state, message: null };
         case actionTypes.SYSTEM_SET_LOADING:
             return { ...state, loading: action.payload };

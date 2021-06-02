@@ -1,0 +1,78 @@
+@use 'sass:math';
+@import '../../var/defaults';
+@import '../../var/mixins';
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $overlay-color, $alpha: .60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+
+    .dialogBody {
+        background-color: $modal-content-bg;
+        padding: 0;
+        margin: 0;
+        min-width: 25vw;
+        max-width: 100vw;
+        box-shadow: 0 0 60px rgba(0,0,0,.2);
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        .dialogContent,
+        .dialogTitle {
+            padding: math.div($grid-gutter-width, 4);
+
+            .dialogClose {
+                float: right;
+                border: none;
+                background: transparent;
+                color: $text-inverse;
+                cursor: pointer;
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+        }
+
+        .dialogContent {
+            font-size: 0.95rem;
+            line-height: 1.4rem;
+            @include media-breakpoint-down(sm) {
+                font-size: 1.2rem;
+                line-height: 1.75rem;
+            }
+        }
+
+        .dialogTitle {
+            background-color: $modal-header-bg;
+            border-bottom: 1px solid $modal-header-border;
+            color: $text-inverse;
+        }
+        .dialogFooter {
+            display: flex;
+            justify-content: flex-end;
+            padding: math.div($grid-gutter-width, 6);
+            border-top: 1px solid $modal-footer-border-color;
+        }
+    }
+}

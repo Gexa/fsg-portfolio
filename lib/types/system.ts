@@ -2,6 +2,7 @@ export type Message = {
     title?: string;
     content: string;
     closeable?: boolean;
-    buttons: JSX.Element[] | null;
+    buttons: any[] | null;
+    onClose?: Function;
     backdrop?: boolean;
 }

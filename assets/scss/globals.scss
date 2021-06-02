@@ -23,6 +23,10 @@ body {
 	> div:not(#portal) {
 		min-height: 100vh;
 	}
+
+	img {
+		max-width: 100%;
+	}
 }
 
 .app {
@@ -34,7 +38,11 @@ body {
 
 	> main {
 		flex: 1;
-		min-height: 100vh;
+		min-height: 50vh;
+		@include media-breakpoint-up(lg) {
+			min-height: 80vh;
+		}
+
 		overflow: visible;
 	}
 

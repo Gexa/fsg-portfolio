@@ -4,13 +4,22 @@
 
 .btn {
     cursor: pointer;
+    padding: math.div($grid-gutter-width, 10) math.div($grid-gutter-width, 4);
+    border: 0;
+    margin: 0;
+
     &.primary {
         background: $primary;
-        border: 0;
-        margin: 0;
-        padding: math.div($grid-gutter-width, 10) math.div($grid-gutter-width, 4);
         &:hover {
             background-color: rgba($color: $primary, $alpha: .70);
+        }
+    }
+
+    &.danger {
+        color: $text-inverse;
+        background-color: $danger;
+        &:hover {
+            background-color: rgba($color: $danger, $alpha: .70);
         }
     }
 
@@ -29,5 +38,9 @@
         font-size: 1rem;
         font-weight: 600;
         padding: math.div($grid-gutter-width, 6) math.div($grid-gutter-width, 2);
+    }
+
+    > span:last-child {
+        margin-left: 0.5rem;
     }
 }

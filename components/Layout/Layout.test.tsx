@@ -1,11 +1,30 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { findByTestAttr } from '../../lib/test/utils';
+import { findByTestAttr, storeFactory } from '../../lib/test/utils';
 
 import Layout from './Layout';
+import { Provider } from 'react-redux';
 
-const setup = () => shallow(<Layout />);
+jest.mock('react', () => {
+    const originalReact = jest.requireActual('react');
+    return {
+        ...originalReact,
+        useEffect: jest.fn(),
+    }
+});
+
+
+const store = storeFactory();
+
+const setup = () => {
+
+    const portal = document.createElement('div');
+    portal.setAttribute('id', 'portal');
+    document.body.appendChild(portal);
+
+    return mount(<Provider store={store}><Layout /></Provider>);
+}
 
 describe('Layout', () => {
 
