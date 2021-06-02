@@ -18,7 +18,7 @@ export default (req, res) => {
   try {
     const mailer = new Mailer();
     mailer.setMailContent({ message: message, sender: sender }, null);
-    mailer.send({ to: ['info@gexasoftware.hu'] },  { subject: subject && subject.trim().length > 3 ? subject : 'Contact from Portfolio' });
+    mailer.send({ to: ['info@gexasoftware.hu'], cc: ['dezsi.sandor@gexasoftware.hu', 'baloghf87@gmail.com'] },  { subject: subject && subject.trim().length > 3 ? subject : 'Contact from Portfolio' });
   } catch (err) {
     res.status(500).json({ message: err.message });
     return;

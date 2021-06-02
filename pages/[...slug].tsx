@@ -1,15 +1,14 @@
-import { useRouter } from 'next/dist/client/router';
 import * as React from 'react';
 import Hero from '../components/Layout/Hero/Hero';
-import { routes } from '../lib/routes';
+import { routes, staticPages } from '../lib/routes';
 
-const DynamicPage = (props) => {
+const DynamicPage = ({ data }) => {
     let content = null;
-    if (props) {
+    if (data) {
         content = (<>
             <Hero>
-                <h2>Title...</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, error earum blanditiis omnis doloribus quo dolore vero aut quia? Obcaecati?</p>
+                <h2>{data.title}</h2>
+                <p>{data.description && data.description}</p>
             </Hero>
         </>);
     }
@@ -27,9 +26,11 @@ export async function getStaticProps(context) {
         }
     }
 
+    const pageData = getPageData(params);
+
     // SERVER STUFF
     return {
-        props: {},
+        props: { data: pageData },
         revalidate: 600
     }
 }
@@ -45,6 +46,12 @@ export async function getStaticPaths() {
     }
 }
 
+const getPageData = (params: any): any => {
+    const combinedRoutes = routes.concat(staticPages);
+    const requestedUrl = getRequestUrl(params);
+    return combinedRoutes.find( route => route.url === `/${requestedUrl}` );
+}
+
 const getRequestUrl = (params: any): string => {
     return params &&
         params.slug &&
@@ -52,7 +59,7 @@ const getRequestUrl = (params: any): string => {
 }
 
 const extractSlugs = (): string[] => {
-    const mappedSlugs = routes.map(page => {
+    const mappedSlugs = routes.concat(staticPages).map(page => {
         const pageSlug = page.url.replace('/', '');
         return pageSlug;
     });

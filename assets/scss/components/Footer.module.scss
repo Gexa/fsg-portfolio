@@ -65,11 +65,11 @@ svg.wave {
                 width: 40%;
                 padding: $grid-gutter-width * 1.75 math.div($grid-gutter-width , 4) 0 0;
             }
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 2.2rem;
             color: $text-muted;
             text-align: right;
-            opacity: 0.6;
+            opacity: 0.9;
 
             > strong {
                 display: block;
