@@ -9,7 +9,7 @@ import MetaReader from '../lib/node/class/MetaReader/MetaReader';
 
 const DynamicPage = ({ title, description, content }) => {
 
-    let dynamicPageContent = null;
+    let dynamicPageContent = <p>Loading data...</p>;
     if (content) {
         dynamicPageContent = (
         <>
