@@ -1,9 +1,9 @@
 export const routes = [
     { url: '/team', title: 'TEAM',
         sub: [
-            { url: '/ferenc', title: 'Ferenc CV' },
-            { url: '/sandor', title: 'Sándor CV' },
-            { url: '/gergo', title: 'Gergő CV' },
+            { url: '/ferenc', title: 'Ferenc CV', description: 'Ferenc Balogh, Senior JAVA developer' },
+            { url: '/sandor', title: 'Sándor CV', description: 'Sándor Dézsi, Senior Full-Stack developer' },
+            { url: '/gergo', title: 'Gergő CV', description: 'Gergő Boldogh, Senior Full-Stack developer' },
         ],
         description: 'Small team with huge knowledge base and tons of experience...'
     },

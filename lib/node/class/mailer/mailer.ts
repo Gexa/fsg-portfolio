@@ -6,7 +6,7 @@
 import nodemailer from 'nodemailer';
 import path from 'path';
 import fs from 'fs';
-import MailerError from '../../error/mailer';
+import MailerError from '../../error/MailerError';
 
 const { htmlToText } = require('html-to-text');
 
@@ -46,31 +46,6 @@ class Mailer<T> {
         throw new MailerError(errorMessage);
     }
 
-    private getTemplatePath(templateObject: { name: string; directory: string }): string {
-        return path.join(process.cwd(), templateObject.directory) + templateObject.name
-    }
-
-    private isTemplateExists(templateObject: { name: string; directory: string}): boolean {
-        const templatePath = this.getTemplatePath(templateObject);
-        const isTemplateExists = fs.existsSync(templatePath);
-        return isTemplateExists;
-    }
-
-    /**
-     * @function private method to get template file's content from file system
-     * @param  {object: { name: string; directory: string }}
-     */
-    private getTemplate(templateObject: { name: string; directory: string}) {
-        if (!this.isTemplateExists(templateObject)) {
-            this.Error('Trying to access a non-existing mail template.');
-        }
-
-        const templatePath = this.getTemplatePath(templateObject);
-
-        const templateContent = fs.readFileSync(templatePath, 'utf-8');
-        return templateContent;
-    }
-
     private isContentValid(content?: object | string): boolean {
         const contentToValidate = !content ? this.mailContent : content
         switch (typeof contentToValidate) {
@@ -100,7 +75,7 @@ class Mailer<T> {
             try {
                 templateString = this.getTemplate(template);
             } catch (error) {
-                templateString = Object.keys(content).map( key =>  `{{${key.toUpperCase()}}}` ).join('<br />');
+                templateString = this.getTemplateFromObject(content);
             }
 
             for (var key in (content as object)) {
@@ -117,6 +92,37 @@ class Mailer<T> {
         }
     }
 
+    /**
+     * @function private method to get template file's content from file system
+     * @param  {object: { name: string; directory: string }}
+     */
+     private getTemplate(templateObject: { name: string; directory: string}) {
+        if (!this.isTemplateExists(templateObject)) {
+            this.Error('Trying to access a non-existing mail template.');
+        }
+
+        const templatePath = this.getTemplatePath(templateObject);
+
+        const templateContent = fs.readFileSync(templatePath, 'utf-8');
+        return templateContent;
+    }
+
+    private getTemplateFromObject(content: any | object): string {
+        return Object.keys(content).map(
+                key =>  `{{${key.toUpperCase()}}}`
+            ).join('<br />');
+    }
+
+    private isTemplateExists(templateObject: { name: string; directory: string}): boolean {
+        const templatePath = this.getTemplatePath(templateObject);
+        const isTemplateExists = fs.existsSync(templatePath);
+        return isTemplateExists;
+    }
+
+    private getTemplatePath(templateObject: { name: string; directory: string }): string {
+        return path.join(process.cwd(), templateObject.directory) + templateObject.name
+    }
+
     private isRecipientValid(recipients: MailRecipient): boolean {
         return recipients && recipients.to && recipients.to.length > 0;
     }
@@ -124,6 +130,7 @@ class Mailer<T> {
     private getSenderAddress(): string {
         return (`"${process.env.owner_name}" <${process.env.owner_email}>`);
     }
+
     /**
      * @public (async) send function to send e-mail with the pre-defined content by setContent()
      * @param  {MailRecipient} recipients object, see @type MailRecipent

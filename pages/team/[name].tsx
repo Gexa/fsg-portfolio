@@ -49,7 +49,7 @@ const getTeamMember = (params: any): any => {
     const userRoutes = filterUserRoutes();
     const slug = params.name;
 
-    if (!slug) {
+    if (!isSlugValid(slug)) {
         return false;
     }
 
@@ -59,7 +59,7 @@ const getTeamMember = (params: any): any => {
 
     try {
         const dataReader = new DataReader(slug, 'data/team');
-        memberCV = dataReader.get();
+        memberCV = dataReader.getContent();
     } catch (error) {
         return false;
     }
@@ -68,6 +68,10 @@ const getTeamMember = (params: any): any => {
         ...memberMetaData,
         content: memberCV
     };
+}
+
+const isSlugValid = (slug: string): boolean => {
+    return slug && slug.trim().length > 0;
 }
 
 export default TeamMember;
