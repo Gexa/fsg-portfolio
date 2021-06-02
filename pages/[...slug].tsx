@@ -60,7 +60,6 @@ export async function getStaticProps(context) {
         }
     }
 
-    // SERVER STUFF
     return {
         props: {
             ...metaData,
