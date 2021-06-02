@@ -6,6 +6,7 @@ import Markdown from 'markdown-to-jsx';
 import { routes, staticPages } from '../lib/routes';
 import DataReader from '../lib/node/class/DataReader/DataReader';
 import MetaReader from '../lib/node/class/MetaReader/MetaReader';
+import CustomHead from '../components/Layout/CustomHead/CustomHead';
 
 const DynamicPage = ({ title, description, content }) => {
 
@@ -13,6 +14,7 @@ const DynamicPage = ({ title, description, content }) => {
     if (content) {
         dynamicPageContent = (
         <>
+            <CustomHead title={title} description={description} />
             <Hero>
                 <h2>{title}</h2>
                 <p>{description && description}</p>

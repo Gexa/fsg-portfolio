@@ -1,20 +1,25 @@
 import * as React from 'react';
 import { routes } from '../../lib/routes';
 import Markdown from 'markdown-to-jsx';
+import CustomHead from '../../components/Layout/CustomHead/CustomHead';
+
+/* Server Side */
 import DataReader from '../../lib/node/class/DataReader/DataReader';
 
 const TeamMember = ({ data }) => {
-
     return (
-        <div className="container">
-            {data.content && (
-            <article>
-                <Markdown>
-                    {data.content}
-                </Markdown>
-            </article>
-            )}
-        </div>
+        <>
+            <CustomHead title={data.title} description={data.description} />
+            <div className="container">
+                {data.content && (
+                <article>
+                    <Markdown>
+                        {data.content}
+                    </Markdown>
+                </article>
+                )}
+            </div>
+        </>
     )
 }
 
