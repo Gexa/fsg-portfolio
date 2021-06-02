@@ -8,7 +8,7 @@ export default (req, res) => {
   }
 
   const { subject, sender, message, verify, terms } = req.body;
-  console.log(typeof req.body);
+
   if (!message || htmlToText(message).trim().length < 20) {
     console.log(message);
     res.status(422).json({ message: 'Your message is too short! Please type at least 20 characters!' });
