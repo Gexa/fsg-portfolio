@@ -1,15 +1,27 @@
 import * as React from 'react';
 import Hero from '../components/Layout/Hero/Hero';
 import { routes, staticPages } from '../lib/routes';
+import Markdown from 'markdown-to-jsx';
+import DataReader from '../lib/node/class/DataReader/DataReader';
 
 const DynamicPage = ({ data }) => {
-    let content = null;
+    let content = data.content && data.content;
     if (data) {
-        content = (<>
+        content = (
+        <>
             <Hero>
                 <h2>{data.title}</h2>
                 <p>{data.description && data.description}</p>
             </Hero>
+            <div className="container">
+                {content && (
+                <article>
+                    <Markdown>
+                        {content}
+                    </Markdown>
+                </article>
+                )}
+            </div>
         </>);
     }
 
@@ -27,7 +39,11 @@ export async function getStaticProps(context) {
     }
 
     const pageData = getPageData(params);
-
+    if (!pageData) {
+        return {
+            notFound: true
+        }
+    }
     // SERVER STUFF
     return {
         props: { data: pageData },
@@ -48,8 +64,28 @@ export async function getStaticPaths() {
 
 const getPageData = (params: any): any => {
     const combinedRoutes = routes.concat(staticPages);
-    const requestedUrl = getRequestUrl(params);
-    return combinedRoutes.find( route => route.url === `/${requestedUrl}` );
+    const slug = getRequestUrl(params);
+
+    if (!slug) {
+        return false;
+    }
+
+    const fullURL = `/${slug}`;
+    const metaData = combinedRoutes.find( route => route.url === fullURL );
+    let pageData: string = '';
+
+    try {
+        const dataReader = new DataReader(slug);
+        pageData = dataReader.get();
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+
+    return {
+        ...metaData,
+        content: pageData
+    };
 }
 
 const getRequestUrl = (params: any): string => {

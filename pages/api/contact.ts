@@ -1,4 +1,4 @@
-import Mailer from "../../lib/node/class/mailer/mailer";
+import Mailer from "../../lib/node/class/Mailer/Mailer";
 import { htmlToText } from 'html-to-text';
 
 export default (req, res) => {
