@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from '../lib/test/utils';
-import Home from './index';
+import Home from '../index';
 
 const setup = (props?) => {
     return shallow(<Home {...props} />);
