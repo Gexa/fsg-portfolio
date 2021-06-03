@@ -1,4 +1,4 @@
-![Gergő](/images/gergo/01.jpg)
+![Gergő](/images/gergo/gergo.jpg)
 
 ### Senior Full-Stack
 > developer

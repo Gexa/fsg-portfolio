@@ -5,7 +5,21 @@
 .Hero {
     background: $header-bg;
     position: relative;
-    background: $header-bg url('/bg.png');
+    background-color: $header-bg;
+    background-image: url('/bg_720.png');
+    
+    @include media-breakpoint-up(md) {
+        background-image: url('/bg_1280.png');
+    }
+    
+    @include media-breakpoint-up(lg) {
+        background-image: url('/bg_1440.png');
+    }
+
+    @include media-breakpoint-up(xl) {
+        background-image: url('/bg.png');
+    }
+
     background-size: cover;
     background-blend-mode: overlay;
     margin-bottom: -$grid-gutter-width * 1.75;

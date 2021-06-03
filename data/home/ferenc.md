@@ -1,4 +1,4 @@
-![Ferenc](/images/gergo/01.jpg)
+![Ferenc](/images/ferenc/ferenc.jpg)
 
 ### Senior JAVA
 > developer

@@ -1,19 +1,16 @@
 import * as React from 'react';
-import styles from '../assets/scss/pages/index.module.scss';
+import { useRouter } from 'next/router';
+import Markdown from 'markdown-to-jsx';
 
 import Hero from '../components/Layout/Hero/Hero';
 import MemberImage from '../components/UI/MemberImage/MemberImage';
 
-import Markdown from 'markdown-to-jsx';
+import styles from '../assets/scss/pages/index.module.scss';
 
 /* Server Side */
 import DataReader from '../lib/node/class/DataReader/DataReader';
-import { useRouter } from 'next/dist/client/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-/* Div to replace Markdown paragraphs */
-const CustomDiv: React.FunctionComponent = props => <div {...props} />
-const CVLink: React.FunctionComponent = props => <span className={styles.CVLink}>{props.children} <FontAwesomeIcon icon={['fas', 'file-code']} /></span>
+import { CustomDiv, CVLink } from '../components/UI/utils';
 
 const Home = ({ about, introduction }) => {
 
@@ -25,7 +22,7 @@ const Home = ({ about, introduction }) => {
 			}
 		},
 		p: CustomDiv,
-		a: CVLink
+		a: { component: CVLink, props: { className: styles.CVLink } }
 	};
 
 	const router = useRouter();

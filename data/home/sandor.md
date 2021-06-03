@@ -1,4 +1,4 @@
-![Sándor](/images/gergo/01.jpg)
+![Sándor](/images/sandor/sandor.jpg)
 
 ### Senior Full-Stack
 > developer

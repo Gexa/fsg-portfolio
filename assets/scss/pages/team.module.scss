@@ -1,0 +1,73 @@
+@use 'sass:math';
+@import '../var/mixins';
+@import '../var/defaults';
+
+.CV {
+    max-width: 100%;
+    padding: math.div($grid-gutter-width, 2) $grid-gutter-width;
+    line-height: 1.75;
+    position: relative;
+
+    div {
+        padding: math.div($grid-gutter-width, 4);
+    }
+
+    h2 {
+        color: $text-color;
+        margin: 0;
+        padding: 0 0 0 15px;
+        font-weight: lighter;
+        color: $dark;
+        position: relative;
+        font-size: 1.8rem !important;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0px;
+            height: 0px;
+            transform: rotate(45deg);
+            border-top: 5px solid $primary;
+            border-right: 5px solid $primary;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid transparent;
+        }
+    }
+
+    h3 {
+        padding: 0 math.div($grid-gutter-width, 4);
+        margin: 0;
+        color: $dark;
+        font-weight: 600;
+    }
+
+    .cvImage {
+        width: 20vw;
+        position: absolute;
+        margin: 0;
+        top: $grid-gutter-width;
+        right: $grid-gutter-width;
+        text-align: center;
+        box-shadow: 0 0 20px $text-muted;
+
+        figcaption {
+            padding: math.div($grid-gutter-width, 10);
+            background-color: rgba($color: $dark, $alpha: 0.95);
+            color: $text-muted;
+            font-weight: lighter;
+            font-size: 1.25rem;
+        }
+    }
+
+    > blockquote {
+        border-left: 10px solid rgba($color: $dark, $alpha: 0.30);
+        padding: 0 0 0 math.div($grid-gutter-width, 10);
+        margin: math.div($grid-gutter-width, 4);
+        color: rgba($color: $dark, $alpha: 0.50);
+        > div {
+            padding: 5px;
+        }
+    }
+}
