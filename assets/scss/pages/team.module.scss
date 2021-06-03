@@ -4,7 +4,9 @@
 
 .CV {
     max-width: 100%;
-    padding: math.div($grid-gutter-width, 2) $grid-gutter-width;
+    @include media-breakpoint-up(md) {
+        padding: math.div($grid-gutter-width, 2) $grid-gutter-width;
+    }
     line-height: 1.75;
     position: relative;
 
@@ -44,13 +46,18 @@
     }
 
     .cvImage {
-        width: 20vw;
-        position: absolute;
-        margin: 0;
-        top: $grid-gutter-width;
-        right: $grid-gutter-width;
+        max-width: 100%;
+        margin: 0 auto;
         text-align: center;
         box-shadow: 0 0 20px $text-muted;
+
+        @include media-breakpoint-up(sm) {
+            margin: 0;
+            width: 20vw;
+            position: absolute;
+            top: $grid-gutter-width;
+            right: $grid-gutter-width;
+        }
 
         figcaption {
             padding: math.div($grid-gutter-width, 10);

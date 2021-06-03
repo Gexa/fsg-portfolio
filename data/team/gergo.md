@@ -1,6 +1,6 @@
-![Gergő Boldogh](/images/gergo/gergo.jpg)
-
 ## Gergő Boldogh
+
+![Gergő Boldogh](/images/gergo/gergo.jpg)
 
 > Full-Stack web developer, since 2008
 
@@ -22,15 +22,20 @@
 - **CSS, CSS3** *(10+ years)*
 - **CMS** development *(10+ years)*
 - **Building user interfaces** *(10+ years)*
+- **MySQL** *(10+ years)*
+- **Adobe Photoshop** *(5+ years)*
 - **Responsive webdesign** *(5+ years)*
 - **API** development *(5+ years)*
 - **Apache Cordova** *(2+ years)*
 - **NodeJS** *(2+ years)*
-- **ReactJS** *(1+ year)*
+- **ReactJS** *(~2 year)*
+- **NoSQL** *(1 year)*
+- **TypeScript** *(3+ months)*
 - **Next.js** framework *(~3 months)*
 
+
 ## Some Projects
-Most of these project was built with my own CMS, which uses OOP PHP with MVC framework.
+> Most of these project was built with my own CMS, which uses OOP PHP with MVC framework.
 
 
 ### Webshops
