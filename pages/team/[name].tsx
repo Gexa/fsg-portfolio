@@ -36,7 +36,7 @@ export async function getStaticPaths() {
     const userRoutes = filterUserRoutes();
     const names = userRoutes.map( route => ({ 
         params: { 
-            name: route.url.replaceAll('/', '')
+            name: route.url.replace(new RegExp('/', 'g'), '')
         }
     }) );
 

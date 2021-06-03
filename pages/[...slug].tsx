@@ -56,6 +56,7 @@ export async function getStaticProps(context) {
         pageData = dataReader.getContent();
         metaData = metaReader.getContent();
     } catch (error) {
+        console.log(error);
         return {
             notFound: true,
             props: { error: error }

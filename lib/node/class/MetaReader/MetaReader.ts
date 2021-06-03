@@ -21,7 +21,7 @@ export default class MetaReader implements IData {
     }
 
     private slugFromUrl(url: string): string {
-        return url.replaceAll('/', '');
+        return url.replace(new RegExp('/', 'g'), '');
     }
 
     private filterSubRoutes(): any[] {
