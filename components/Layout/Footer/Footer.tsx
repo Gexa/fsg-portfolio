@@ -30,7 +30,7 @@ const Footer = () => {
                     </blockquote>
                 </div>
 
-                <div data-test="copyright" className={[styles.copyright, 'container'].join(' ')}>Copyright &copy; Gexa'Software International Ltd. - All rights reserved!</div>
+                <div data-test="copyright" className={[styles.copyright, 'container-fluid'].join(' ')}>Copyright &copy; Gexa'Software International Ltd. - All rights reserved!</div>
             </footer>
         </>
     );

@@ -10,8 +10,12 @@
     background-blend-mode: overlay;
     margin-bottom: -$grid-gutter-width * 1.75;
 
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(xl) {
         margin-bottom: -$grid-gutter-width;
+    }
+
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 1rem;
     }
 
     @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'lg')) {
@@ -39,10 +43,6 @@
         @include media-breakpoint-up(lg) {
             justify-content: flex-start;
             height: 55vh;
-            padding-top: 10%;
-        }
-
-        @include media-breakpoint-up(xl) {
             padding-top: 7.5%
         }
 
@@ -51,11 +51,11 @@
         }
 
         .content {
-            max-width: 50%;
+            max-width: 55%;
             border-left: 3px solid $primary;
             padding: math.div($grid-gutter-width, 4) math.div($grid-gutter-width, 2);
             @include media-breakpoint-down(lg) {
-                max-width: 80%;
+                max-width: 75%;
                 align-self: center;
                 justify-self: center;
             }

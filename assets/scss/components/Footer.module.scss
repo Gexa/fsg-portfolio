@@ -2,6 +2,8 @@
 @import "../var/defaults";
 @import "../var/mixins";
 
+$half-gutter: math.div($grid-gutter-width, 2);
+
 svg.wave {
     height: 100px;
     width: 100%;
@@ -30,31 +32,38 @@ svg.wave {
         width: 100%;
         text-align: center;
         font-size: 0.75rem;
-        color: $text-muted;
+        color: rgba($color: $text-muted, $alpha: 0.6);
         padding: math.div($grid-gutter-width, 4) 0;
+        background: $dark;
     }
 
     > .footerTop {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-bottom: $half-gutter;
+        padding: $half-gutter 0;
 
         > .contactWrapper {
             width: 100%;
             padding: 0 math.div($grid-gutter-width , 2);
+            border-left: 2px solid $primary;
+            @include media-breakpoint-down(md) {
+                border-left: none;
+            }
+
             @include media-breakpoint-up(md) {
-                padding: 0;
+                padding: 0 0 0 $half-gutter;
                 width: 50%;
             }
-            min-height: 400px;
-
+            
 
             h2.contactHeader {
                 font-size: 2.5rem;
                 font-weight: 800;
                 color: $text-inverse;
                 padding: 0;
-                margin: math.div($grid-gutter-width, 2) 0;
+                margin: 1rem 0 math.div($grid-gutter-width, 2) 0;
             }
         }
 
@@ -66,7 +75,7 @@ svg.wave {
                 padding: $grid-gutter-width * 1.75 math.div($grid-gutter-width , 4) 0 0;
             }
             font-size: 1.1rem;
-            line-height: 2.2rem;
+            line-height: $half-gutter;
             color: $text-muted;
             text-align: right;
             opacity: 0.9;
@@ -80,7 +89,7 @@ svg.wave {
                 display: block;
                 @mixin useSameFont {
                     color: $text-muted;
-                    font-size: 2rem;
+                    font-size: $half-gutter;
                     font-family: Helvetica;
                     padding: 0 5px;
                     line-height: 1.8rem;
