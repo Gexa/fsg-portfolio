@@ -82,7 +82,7 @@ class Mailer<T> {
                 const contentReplace = content[key];
                 const keyToReplace = `{{${key.toUpperCase()}}}`;
                 if (templateString.length)
-                    templateString = templateString.replaceAll(keyToReplace, contentReplace);
+                    templateString = templateString.replace(new RegExp(keyToReplace, 'g'), contentReplace);
             }
 
             this.mailContent = templateString;
