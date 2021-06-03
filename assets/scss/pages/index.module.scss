@@ -33,6 +33,7 @@
                     transition: all 0.2s ease-in-out;
                     &:hover {
                         transform: scale3d(1.1, 1.1, 1.1);
+                        box-shadow: 0 0 20px #DDDDDD;
                     }
                 }
                 width: 100%;
