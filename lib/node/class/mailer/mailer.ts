@@ -1,5 +1,4 @@
 /**
- * @package Mailer of EZManage 4
  * @author Gergő Boldogh
  * @copyright Gexa'Software 2021
 */
@@ -146,6 +145,8 @@ class Mailer<T> {
         }
 
         const recipientAddresses: string = recipients.to.join(', ');
+        const ccAddresses: string = recipients.cc && recipients.cc.length ? recipients.cc.join(', ') : '';
+        const bccAddresses: string = recipients.bcc && recipients.bcc.length ? recipients.bcc.join(', ') : '';
         const mailSubject = (options.subject ? options.subject : 'No subject');
 
         let messageTransportInfo;
@@ -155,6 +156,8 @@ class Mailer<T> {
                 await this.mailTransporter.sendMail({
                     from: this.getSenderAddress(),
                     to: recipientAddresses,
+                    cc: ccAddresses,
+                    bcc: bccAddresses,
                     subject: mailSubject,
                     text: htmlToText(this.mailContent, {}),
                     html: this.mailContent,
