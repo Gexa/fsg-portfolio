@@ -1,4 +1,4 @@
-# Gergő Boldogh
+## Gergő Boldogh
 
 > Full-Stack web developer, since 2008
 

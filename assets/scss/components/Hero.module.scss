@@ -8,7 +8,11 @@
     background: $header-bg url('/bg.png');
     background-size: cover;
     background-blend-mode: overlay;
-    margin-bottom: -$grid-gutter-width;
+    margin-bottom: -$grid-gutter-width * 1.75;
+
+    @include media-breakpoint-down(lg) {
+        margin-bottom: -$grid-gutter-width;
+    }
 
     @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'lg')) {
         clip-path: url(#headerCurve);
@@ -20,8 +24,6 @@
         height: 100%;
         opacity: .90;
         position: absolute;
-        /* background: -moz-linear-gradient(left,  $header-bg 0%, $header-bg 50%, rgba(0,0,0,0) 100%);
-        background: -webkit-linear-gradient(left,  $header-bg 0%,$header-bg 50%,rgba(0,0,0,0) 100%); */
         background: linear-gradient(to right,  $header-bg 0%,$header-bg 35%,rgba(0,0,0,0) 100%);
         top: 0;
         left: 0;

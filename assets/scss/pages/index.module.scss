@@ -1,7 +1,95 @@
+@use 'sass:math';
 @import '../var/defaults';
+@import '../var/mixins';
 
 .container {
     padding: 0;
     margin: 0;
     max-width: 100vw;
+
+    .members {
+        font-family: $font-family;
+        margin-bottom: 2rem;
+
+        header > h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .articles {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+
+            > article.oneMember {
+                flex: auto;
+
+                > div.oneMemberInner {
+                    background-color: $modal-content-bg;
+                    margin: 0 math.div($grid-gutter-width, 2);
+                    padding-bottom: math.div($grid-gutter-width, 2);
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    &:hover {
+                        transform: scale3d(1.1, 1.1, 1.1);
+                    }
+                }
+                width: 100%;
+
+                @include media-breakpoint-up(md) {
+                    width: 33.3333%;
+                }
+
+                .memberImage {
+                    background-color: $inverse-bg;
+                    padding: 0;
+                    margin: 0 0 1rem 0;
+
+                    figcaption {
+                        padding: 0.5rem;
+                        text-align: center;
+                        color: $primary;
+                        text-transform: uppercase;
+                        font-size: 1.25rem;
+                        font-weight: lighter;
+                    }
+                }
+
+                img {
+                    max-width: 100%;
+                }
+
+                blockquote, h3 {
+                    padding: 0;
+                    margin: 0;
+                    text-align: center;
+                    font-size: 21px;
+                }
+
+                blockquote {
+                    font-weight: lighter;
+                    margin-top: 0.5rem;
+                }
+
+                ul {
+                    margin: 2rem 0;
+                    padding: 0 2rem;
+                    list-style: none;
+                    font-size: 1rem;
+                    line-height: 1.6rem;
+                    text-align: justify;
+                    color: $text-color;
+                }
+
+                .CVLink {
+                    display: block;
+                    text-align: right;
+                    padding: 0 2rem 0 0;
+                    margin-bottom: 1rem;
+                    color: $primary;
+                }
+            }
+        }
+    }
 }

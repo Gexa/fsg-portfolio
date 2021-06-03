@@ -2,12 +2,34 @@ import * as React from 'react';
 import styles from '../assets/scss/pages/index.module.scss';
 
 import Hero from '../components/Layout/Hero/Hero';
+import MemberImage from '../components/UI/MemberImage/MemberImage';
+
 import Markdown from 'markdown-to-jsx';
 
 /* Server Side */
 import DataReader from '../lib/node/class/DataReader/DataReader';
+import { useRouter } from 'next/dist/client/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+/* Div to replace Markdown paragraphs */
+const CustomDiv: React.FunctionComponent = props => <div {...props} />
+const CVLink: React.FunctionComponent = props => <span className={styles.CVLink}>{props.children} <FontAwesomeIcon icon={['fas', 'file-code']} /></span>
 
 const Home = ({ about, introduction }) => {
+
+	const markDownOverrides = {
+		img: { 
+			component: MemberImage,
+			props: {
+				className: styles.memberImage
+			}
+		},
+		p: CustomDiv,
+		a: CVLink
+	};
+
+	const router = useRouter();
+
 	return (
 		<div className={styles.container} data-test="component-home">
 			<Hero>
@@ -15,19 +37,21 @@ const Home = ({ about, introduction }) => {
 				{about}
 				</Markdown>
 			</Hero>
-			<section className="container members" id="WeAre">
+			<section className={['container', styles.members].join(' ')} id="WeAre">
 				<header>
 					<h2>We are...</h2>
+				</header>
+				<div className={styles.articles}>
 					{introduction && introduction.map( (member, index) => {
 						return (
-							<article key={index} className="one-member">
-								<Markdown>
-									{member}
+							<article key={index} className={styles.oneMember}>
+								<Markdown onClick={() => router.push(`/team/${member.slug}`)} className={styles.oneMemberInner} options={{ wrapper: 'div', overrides: markDownOverrides }}>
+									{member.content}
 								</Markdown>
 							</article>
 						);
 					} )}
-				</header>
+				</div>
 			</section>
 		</div>
 	)
@@ -35,25 +59,22 @@ const Home = ({ about, introduction }) => {
 
 export const getStaticProps = async () => {
 
-	let aboutUs;
-	let weAre = ['ferenc', 'sandor', 'gergo'];
-	let teamIntroduction: string[];
+	const weAre = ['ferenc', 'sandor', 'gergo'];
+	let aboutUs: string;
+	let teamIntroduction: object[];
 
 	try {
 		const dataReader = new DataReader('about', 'data/home');
 		aboutUs = dataReader.getContent();
+
 		teamIntroduction = weAre.map(name => {
 			dataReader.slug = name;
-			return dataReader.getContent();
+			return { slug: name, content: dataReader.getContent() };
 		});
 
 	} catch (error) {
-		console.log(error);
 		return {
-			notFound: true,
-			props: {
-				error: error
-			}
+			notFound: true
 		}
 	}
 

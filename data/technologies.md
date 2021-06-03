@@ -1,1 +1,1 @@
-# Teachnologies we use
+## Technologies we use

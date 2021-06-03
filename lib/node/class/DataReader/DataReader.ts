@@ -7,7 +7,7 @@ export default class DataReader implements IData {
 
     constructor(private _slug: string = '', private _dir = 'data') { }
 
-    set slug(slug: string) {
+    public set slug(slug: string) {
         this._slug = slug;
     }
 

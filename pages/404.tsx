@@ -6,7 +6,6 @@ const Error404 = (props?) => {
         <div className={styles.Error404Page}>
             <h1><span>404</span> error</h1>
             <p>The given URL does not exist on the server.</p>
-            {props && props.error ? props.error : null}
         </div>
     );
 }
