@@ -5,7 +5,11 @@ import IData from '../../interface/IData';
 
 export default class DataReader implements IData {
 
-    constructor(private slug: string = '', private dir = 'data') { }
+    constructor(private _slug: string = '', private _dir = 'data') { }
+
+    set slug(slug: string) {
+        this._slug = slug;
+    }
 
     getContent() {
         const dataPath = this.getDataPath();
@@ -20,7 +24,7 @@ export default class DataReader implements IData {
     }
 
     private getDataPath(): string {
-        const workingDirectory = path.join(process.cwd(), this.dir);
+        const workingDirectory = path.join(process.cwd(), this._dir);
         const urlData = this.parseUrl();
 
         if (urlData.length === 1) {
@@ -37,10 +41,10 @@ export default class DataReader implements IData {
     }
 
     private parseUrl(): string[] {
-        if (!this.slug || this.slug.trim().length === 0) {
+        if (!this._slug || this._slug.trim().length === 0) {
             throw new DataReaderError('The given Slug for data reader is invalid.');
         }
-        const urlPieces = this.slug.split('/');
+        const urlPieces = this._slug.split('/');
         return urlPieces;
     }
 }

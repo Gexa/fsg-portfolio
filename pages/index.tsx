@@ -2,30 +2,68 @@ import * as React from 'react';
 import styles from '../assets/scss/pages/index.module.scss';
 
 import Hero from '../components/Layout/Hero/Hero';
+import Markdown from 'markdown-to-jsx';
 
-const Home = ({ data }) => {
-  return (
-    <div className={styles.container} data-test="component-home">
-      <Hero>
-        <h2>{data && data.title}</h2>
-        <p>{data && data.description}</p>
-      </Hero>
-    </div>
-  )
+/* Server Side */
+import DataReader from '../lib/node/class/DataReader/DataReader';
+
+const Home = ({ about, introduction }) => {
+	return (
+		<div className={styles.container} data-test="component-home">
+			<Hero>
+				<Markdown>
+				{about}
+				</Markdown>
+			</Hero>
+			<section className="container members" id="WeAre">
+				<header>
+					<h2>We are...</h2>
+					{introduction && introduction.map( (member, index) => {
+						return (
+							<article key={index} className="one-member">
+								<Markdown>
+									{member}
+								</Markdown>
+							</article>
+						);
+					} )}
+				</header>
+			</section>
+		</div>
+	)
 }
 
 export const getStaticProps = async () => {
-  const dummyData = {
-    title: 'About',
-    description: 'Experienced Full-Stack developer team with tons of successfully started and maintained projects. We are proud of our happy and satisfied clients.'
-  }
 
-  return {
-    props: {
-      data: dummyData
-    },
-    revalidate: 60
-  }
+	let aboutUs;
+	let weAre = ['ferenc', 'sandor', 'gergo'];
+	let teamIntroduction: string[];
+
+	try {
+		const dataReader = new DataReader('about', 'data/home');
+		aboutUs = dataReader.getContent();
+		teamIntroduction = weAre.map(name => {
+			dataReader.slug = name;
+			return dataReader.getContent();
+		});
+
+	} catch (error) {
+		console.log(error);
+		return {
+			notFound: true,
+			props: {
+				error: error
+			}
+		}
+	}
+
+	return {
+		props: {
+			about: aboutUs,
+			introduction: teamIntroduction
+		},
+		revalidate: 60
+	}
 }
 
 export default Home;
