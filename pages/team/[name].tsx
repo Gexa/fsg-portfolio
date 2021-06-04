@@ -46,7 +46,8 @@ export async function getStaticProps(context) {
     const teamMemberData = getTeamMember(params);
 
     return {
-        props: { data: teamMemberData }
+        props: { data: teamMemberData },
+	revalidate: 300
     }
 }
 
