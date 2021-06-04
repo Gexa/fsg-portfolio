@@ -1,80 +1,153 @@
 @use 'sass:math';
-@import '../var/mixins';
-@import '../var/defaults';
+@import "../var/mixins";
+@import "../var/defaults";
+
+@mixin arrow($size, $color: $primary) {
+	width: 0px;
+	height: 0px;
+	transform: rotate(45deg);
+	border-top: $size solid $color;
+	border-right: $size solid $color;
+	border-bottom: $size solid transparent;
+	border-left: $size solid transparent;
+}
 
 .CV {
-    max-width: 100%;
-    @include media-breakpoint-up(md) {
-        padding: math.div($grid-gutter-width, 2) $grid-gutter-width;
-    }
-    line-height: 1.75;
-    position: relative;
+	max-width: 100%;
+	@include media-breakpoint-up(md) {
+		padding: math.div($grid-gutter-width, 2) 0;
+	}
+	line-height: 1.75;
+	position: relative;
 
-    div {
-        padding: math.div($grid-gutter-width, 4);
-    }
+	> header {
+		background: linear-gradient(to bottom,  $header-bg 0%,$header-bg 50%,rgba(0,0,0,1) 100%);
+		padding: math.div($grid-gutter-width, 2);
+		margin-bottom: math.div($grid-gutter-width, 2);
+		* {
+			color: $text-inverse;
+		}
 
-    h2 {
-        color: $text-color;
-        margin: 0;
-        padding: 0 0 0 15px;
-        font-weight: lighter;
-        color: $dark;
-        position: relative;
-        font-size: 1.8rem !important;
+		display: flex;
+		justify-content: space-between;
+		> div:first-child {
+			order: 1;
+		}
 
-        &::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 20px;
-            width: 0px;
-            height: 0px;
-            transform: rotate(45deg);
-            border-top: 5px solid $primary;
-            border-right: 5px solid $primary;
-            border-bottom: 5px solid transparent;
-            border-left: 5px solid transparent;
-        }
-    }
+		@include media-breakpoint-down(sm) {
+			flex-wrap: wrap;
+			padding: math.div($grid-gutter-width, 4);
+			> div:first-child {
+				order: 0;
+				width: 100% !important;
+			}
+			> div:last-child {
+				order: 1;
+			}
+		}
 
-    h3 {
-        padding: 0 math.div($grid-gutter-width, 4);
-        margin: 0;
-        color: $dark;
-        font-weight: 600;
-    }
+		.cvImage {
+			max-width: 600px;
+			width: 100%;
+			margin: 0 auto;
+			text-align: center;
 
-    .cvImage {
-        max-width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        box-shadow: 0 0 20px $text-muted;
+			@include media-breakpoint-up(sm) {
+				margin: 0;
+				width: 20vw;
+			}
 
-        @include media-breakpoint-up(sm) {
-            margin: 0;
-            width: 20vw;
-            position: absolute;
-            top: $grid-gutter-width;
-            right: $grid-gutter-width;
-        }
+			figcaption {
+				padding: math.div($grid-gutter-width, 10);
+				background-color: rgba($color: $dark, $alpha: 0.95);
+				color: $text-muted;
+				font-weight: lighter;
+				font-size: 1.25rem;
+			}
+		}
 
-        figcaption {
-            padding: math.div($grid-gutter-width, 10);
-            background-color: rgba($color: $dark, $alpha: 0.95);
-            color: $text-muted;
-            font-weight: lighter;
-            font-size: 1.25rem;
-        }
-    }
+		h2 {
+			color: $text-inverse;
+			&::before {
+				@include arrow(5px, $text-muted);
+			}
+		}
 
-    > blockquote {
-        border-left: 10px solid rgba($color: $dark, $alpha: 0.30);
-        padding: 0 0 0 math.div($grid-gutter-width, 10);
-        margin: math.div($grid-gutter-width, 4);
-        color: rgba($color: $dark, $alpha: 0.50);
-        > div {
-            padding: 5px;
-        }
-    }
+		blockquote {
+			font-weight: 600;
+			margin: 1rem 0;
+		}
+
+		ol {
+			list-style: none;
+			padding: 0;
+			margin: 1rem;
+			@include media-breakpoint-down(sm) {
+				margin: 1rem 0;
+			}
+
+			li {
+				position: relative;
+				float: left;
+				background-color: $primary;
+				padding: 2px 0.5rem;
+				margin: 0.25rem 0.25rem;
+				font-size: 0.85rem;
+				border-radius: 5px;
+				color: rgba($color: $dark, $alpha: 0.8) !important;
+				transition: all 0.25s ease;
+				cursor: help;
+
+				&:hover {
+					transform: scale3d(1.2, 1.2, 1.2);
+					box-shadow: 0 0 10px $dark;
+					z-index: 4;
+				}
+
+				> strong, > em {
+					color: rgba($color: $dark, $alpha: 0.8) !important;
+				}
+			}
+		}
+	}
+
+	div {
+		padding: math.div($grid-gutter-width, 4);
+	}
+
+	h2 {
+		color: $text-color;
+		margin: 0;
+		padding: 0 0 0 15px;
+		font-weight: lighter;
+		color: $dark;
+		position: relative;
+		font-size: 1.8rem !important;
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: -10px;
+			top: 20px;
+			@include arrow(5px, rgba($color: $dark, $alpha: 0.5));
+		}
+	}
+
+	h3 {
+		padding: 0 math.div($grid-gutter-width, 4);
+		margin: 0;
+		color: $dark;
+		font-weight: 600;
+	}
+
+	blockquote {
+		border-left: 10px solid rgba($color: $primary, $alpha: 0.9);
+		padding: 0 0 0 math.div($grid-gutter-width, 10);
+		margin: math.div($grid-gutter-width, 4);
+		color: rgba($color: $dark, $alpha: 0.9);
+		font-weight: lighter;
+		> div {
+			padding: 5px;
+		}
+	}
 }

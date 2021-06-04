@@ -5,13 +5,17 @@
 .header {
     width: 100%;
     margin: 0 auto;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 80px;
-    padding: 0 $grid-gutter-width;
-    @include media-breakpoint-down(xl) {
-        padding: 0 math.div($grid-gutter-width, 2);
+
+    > div {
+
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 80px;
+        padding: 0;
+        @include media-breakpoint-down(md) {
+            padding: 0 math.div($grid-gutter-width, 2);
+        }
     }
     background: $header-bg;
 

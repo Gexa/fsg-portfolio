@@ -79,26 +79,28 @@ const Header: React.FunctionComponent = (props?: any): JSX.Element => {
 
     return (
         <>
-            <header className={[styles.header, 'd-flex'].join(' ')} data-test="component-header">
-                <h1>
-                    <Link href="/">
-                        <a id="logo" className={styles.logo}>
-                            LOGO
-                        </a>
-                    </Link>
-                </h1>
-                <nav className={styles.navbar}>
-                    {builtMenuSystem}
-                    {hamburgerBtn()}
-                </nav>
+            <header className={[styles.header].join(' ')} data-test="component-header">
+                <div className="container d-flex">
+                    <h1>
+                        <Link href="/">
+                            <a id="logo" className={styles.logo}>
+                                LOGO
+                            </a>
+                        </Link>
+                    </h1>
+                    <nav className={styles.navbar}>
+                        {builtMenuSystem}
+                        {hamburgerBtn()}
+                    </nav>
 
-                <div className={styles.social}>
-                    <a href="//github.com" target="_blank">
-                        <FontAwesomeIcon icon={['fab', 'github']} />
-                    </a>
-                    <a href="//linkedin.com" target="_blank">
-                        <FontAwesomeIcon icon={['fab', 'linkedin']} />
-                    </a>
+                    <div className={styles.social}>
+                        <a href="//github.com" target="_blank">
+                            <FontAwesomeIcon icon={['fab', 'github']} />
+                        </a>
+                        <a href="//linkedin.com" target="_blank">
+                            <FontAwesomeIcon icon={['fab', 'linkedin']} />
+                        </a>
+                    </div>
                 </div>
             </header>
             {<Navigation menu={builtMenuSystem} isActive={activeHamburger} Hamburger={hamburgerBtn} clicked={toggleSideNavigation} />}
