@@ -5,7 +5,7 @@
     <div>
     ## Gergő Boldogh
 
-    > Full-Stack web developer, since 2008
+    > Full-Stack web developer, contractor and freelancer *since 2008*
 
     - E-mail: [info@gexa.hu](mailto:info@gexa.hu)
     - Date of birth: 1987. 09. 19.
