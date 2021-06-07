@@ -12,7 +12,7 @@ import DataReader from '../lib/node/class/DataReader/DataReader';
 
 import { CustomDiv, CVLink } from '../components/UI/utils';
 
-const Home = ({ about, introduction }) => {
+const Home = ({ about, homeContent, introduction }) => {
 
 	const markDownOverrides = {
 		img: { 
@@ -35,9 +35,8 @@ const Home = ({ about, introduction }) => {
 				</Markdown>
 			</Hero>
 			<section className={['container', styles.members].join(' ')} id="WeAre">
-				<header>
-					<h2>We are...</h2>
-				</header>
+				{/* <Markdown options={{ wrapper: 'article' }}>{homeContent}</Markdown> */}
+
 				<div className={styles.articles}>
 					{introduction && introduction.map( (member, index) => {
 						return (
@@ -59,14 +58,21 @@ export const getStaticProps = async () => {
 	const weAre = ['ferenc', 'sandor', 'gergo'];
 	let aboutUs: string;
 	let teamIntroduction: object[];
+	let homeContent: string;
 
 	try {
 		const dataReader = new DataReader('about', 'data/home');
 		aboutUs = dataReader.getContent();
 
+		dataReader.slug = 'home';
+		homeContent = dataReader.getContent();
+
 		teamIntroduction = weAre.map(name => {
 			dataReader.slug = name;
-			return { slug: name, content: dataReader.getContent() };
+			return {
+				slug: name,
+				content: dataReader.getContent()
+			 };
 		});
 
 	} catch (error) {
@@ -78,6 +84,7 @@ export const getStaticProps = async () => {
 	return {
 		props: {
 			about: aboutUs,
+			homeContent: homeContent,
 			introduction: teamIntroduction
 		},
 		revalidate: 60

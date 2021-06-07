@@ -11,6 +11,11 @@ html {
 	@include media-breakpoint-up(md) {
 		font-size: 16px;
 	}
+
+	::selection {
+		background-color: $primary;
+		color: white;
+	}
 }
 
 html,
