@@ -4,9 +4,10 @@ import Markdown from 'markdown-to-jsx';
 
 /* Server Side */
 import { routes, staticPages } from '../lib/routes';
-import DataReader from '../lib/node/class/DataReader/DataReader';
+import DataReader, { DataReaderReturnType } from '../lib/node/class/DataReader/DataReader';
 import MetaReader from '../lib/node/class/MetaReader/MetaReader';
 import CustomHead from '../components/Layout/CustomHead/CustomHead';
+import WithAnimation from '../components/hoc/WithAnimation';
 
 const DynamicPage = ({ title, description, content }) => {
 
@@ -19,6 +20,7 @@ const DynamicPage = ({ title, description, content }) => {
                 <h2>{title}</h2>
                 <p>{description && description}</p>
             </Hero>
+            <WithAnimation>
             <div className="container">
                 {content && (
                 <article>
@@ -28,6 +30,7 @@ const DynamicPage = ({ title, description, content }) => {
                 </article>
                 )}
             </div>
+            </WithAnimation>
         </>);
     }
 
@@ -46,7 +49,7 @@ export async function getStaticProps(context) {
 
     const slug = getRequestedSlug(params);
 
-    let pageData: string = '';
+    let pageData: DataReaderReturnType = '';
     let metaData: object;
 
     try {
@@ -56,7 +59,6 @@ export async function getStaticProps(context) {
         pageData = dataReader.getContent();
         metaData = metaReader.getContent();
     } catch (error) {
-        console.log(error);
         return {
             notFound: true,
             props: { error: error }
@@ -69,6 +71,17 @@ export async function getStaticProps(context) {
             content: pageData
          },
         revalidate: 600
+    }
+}
+
+export async function getStaticPaths() {
+    const slugs = extractSlugs();
+
+    return {
+        paths: [
+            { params: { slug: slugs } }
+        ],
+        fallback: 'blocking'
     }
 }
 
@@ -91,17 +104,6 @@ const extractSlugs = (): string[] => {
     });
 
     return mappedSlugs;
-}
-
-export async function getStaticPaths() {
-    const slugs = extractSlugs();
-
-    return {
-        paths: [
-            { params: { slug: slugs } }
-        ],
-        fallback: 'blocking'
-    }
 }
 
 export default DynamicPage;

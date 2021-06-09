@@ -4,11 +4,12 @@ import Markdown from 'markdown-to-jsx';
 
 import Hero from '../components/Layout/Hero/Hero';
 import MemberImage from '../components/UI/MemberImage/MemberImage';
+import WithAnimation from '../components/hoc/WithAnimation';
 
 import styles from '../assets/scss/pages/index.module.scss';
 
 /* Server Side */
-import DataReader from '../lib/node/class/DataReader/DataReader';
+import DataReader, { DataReaderReturnType } from '../lib/node/class/DataReader/DataReader';
 
 import { CustomDiv, CVLink } from '../components/UI/utils';
 
@@ -36,7 +37,7 @@ const Home = ({ about, homeContent, introduction }) => {
 			</Hero>
 			<section className={['container', styles.members].join(' ')} id="WeAre">
 				{/* <Markdown options={{ wrapper: 'article' }}>{homeContent}</Markdown> */}
-
+				<WithAnimation>
 				<div className={styles.articles}>
 					{introduction && introduction.map( (member, index) => {
 						return (
@@ -48,6 +49,7 @@ const Home = ({ about, homeContent, introduction }) => {
 						);
 					} )}
 				</div>
+				</WithAnimation>
 			</section>
 		</div>
 	)
@@ -56,9 +58,9 @@ const Home = ({ about, homeContent, introduction }) => {
 export const getStaticProps = async () => {
 
 	const weAre = ['ferenc', 'sandor', 'gergo'];
-	let aboutUs: string;
+	let aboutUs: DataReaderReturnType;
 	let teamIntroduction: object[];
-	let homeContent: string;
+	let homeContent: DataReaderReturnType;
 
 	try {
 		const dataReader = new DataReader('about', 'data/home');

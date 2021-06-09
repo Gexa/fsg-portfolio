@@ -3,13 +3,14 @@ import { routes } from '../../lib/routes';
 import Markdown from 'markdown-to-jsx';
 import CustomHead from '../../components/Layout/CustomHead/CustomHead';
 
-import { CustomDiv, CVLink } from '../../components/UI/utils';
+import { CustomDiv } from '../../components/UI/utils';
 import MemberImage from '../../components/UI/MemberImage/MemberImage';
+import WithAnimation from '../../components/hoc/WithAnimation';
 
 import styles from '../../assets/scss/pages/team.module.scss';
 
 /* Server Side */
-import DataReader from '../../lib/node/class/DataReader/DataReader';
+import DataReader, { DataReaderReturnType } from '../../lib/node/class/DataReader/DataReader';
 
 const TeamMember = ({ data }) => {
 
@@ -30,13 +31,15 @@ const TeamMember = ({ data }) => {
     return (
         <>
             <CustomHead title={data.title} description={data.description} />
-            <div className="container">
-                {data.content && (
-                <Markdown className={styles.CV} options={{ wrapper: 'article', overrides: markDownOverrides }}>
-                    {data.content}
-                </Markdown>
-                )}
-            </div>
+            <WithAnimation>
+                <div className="container">
+                        {data.content && (
+                        <Markdown className={styles.CV} options={{ wrapper: 'article', overrides: markDownOverrides }}>
+                            {data.content}
+                        </Markdown>
+                        )}
+                </div>
+            </WithAnimation>
         </>
     )
 }
@@ -79,7 +82,7 @@ const getTeamMember = (params: any): any => {
 
     const fullURL = `/${slug}`;
     const memberMetaData = userRoutes.find( route => route.url === fullURL );
-    let memberCV: string = '';
+    let memberCV: DataReaderReturnType = '';
 
     try {
         const dataReader = new DataReader(slug, 'data/team');
