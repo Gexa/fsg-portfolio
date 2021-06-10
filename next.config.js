@@ -2,8 +2,20 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const path = require('path');
 
 module.exports = (phase) => {
+
+    const webpack = (config, options) => {
+        /* config.module.rules.push(
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                loader: 'url-loader?limit=100000'
+            }
+        ) */
+        return config
+    }
+
     if (phase === PHASE_DEVELOPMENT_SERVER) {
         return {
+            webpack: webpack,
             env: {
                 debug: true,
                 /* MySQL */
@@ -27,6 +39,7 @@ module.exports = (phase) => {
             includePaths: [path.join(__dirname, 'assets', 'scss')],
         },
         env: {
+            webpack: webpack,
             debug: false,
             /* MySQL */
             mysql_host: 'localhost',

@@ -16,7 +16,7 @@ describe('Button', () => {
     });
 
     test('Icon rendered when icon and iconGroup is given', () => {
-        const wrapper = setup({ caption: 'Test button', icon: 'sign-in-alt', iconGroup: 'fas' });
+        const wrapper = setup({ caption: 'Test button', icon: <span />, iconGroup: 'fas' });
         const component = findByTestAttr(wrapper, 'component-button');
 
         expect(component.find('span').length).toBe(2);

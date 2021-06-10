@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useRouter } from 'next/dist/client/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Navigation from './Navigation/Navigation';
 
@@ -94,11 +93,8 @@ const Header: React.FunctionComponent = (props?: any): JSX.Element => {
                     </nav>
 
                     <div className={styles.social}>
-                        <a href="//github.com" target="_blank">
-                            <FontAwesomeIcon icon={['fab', 'github']} />
-                        </a>
                         <a href="//linkedin.com" target="_blank">
-                            <FontAwesomeIcon icon={['fab', 'linkedin']} />
+                            <span className={styles.linkedIn}></span>
                         </a>
                     </div>
                 </div>

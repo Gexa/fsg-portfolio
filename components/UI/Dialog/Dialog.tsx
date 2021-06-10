@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import { Message } from '../../../lib/types/system';
 
 import styles from '../../../assets/scss/components/UI/Dialog.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const Dialog = (props: Message) => {
@@ -17,9 +16,7 @@ const Dialog = (props: Message) => {
     }
 
     const closeBtn = props.closeable === true ?
-                    <button className={styles.dialogClose} onClick={handleClose} >
-                            <FontAwesomeIcon icon={['fas', 'times']} />
-                    </button> :
+                    <button className={styles.dialogClose} onClick={handleClose}>x</button> :
                     null;
 
     const children = (

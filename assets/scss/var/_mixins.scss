@@ -80,3 +80,15 @@
         }
     }
 }
+
+
+
+@mixin arrow($size, $color: $primary) {
+	width: 0px;
+	height: 0px;
+	transform: rotate(45deg);
+	border-top: $size solid $color;
+	border-right: $size solid $color;
+	border-bottom: $size solid transparent;
+	border-left: $size solid transparent;
+}

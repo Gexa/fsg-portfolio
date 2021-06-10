@@ -1,0 +1,47 @@
+@use 'sass:math';
+@import '../../var/defaults';
+@import '../../var/mixins';
+
+@mixin figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: math.div($grid-gutter-width, 4);
+    background: rgba($color: $dark, $alpha: 0.8);
+    color: $text-inverse;
+    transition: all 0.2s ease-in;
+    width: 100%;
+}
+
+.gallery {
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+    }
+
+    > div > ul:first-child {
+        bottom: 10%;
+    }
+    /* global */
+    background: $inverse-bg;
+    figure {
+        margin: 0;
+        padding: 0;
+        figcaption {
+            @include figcaption();
+        }
+        img {
+            border: 0;
+            width: 100%;
+        }
+    }
+}

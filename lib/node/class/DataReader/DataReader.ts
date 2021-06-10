@@ -3,7 +3,7 @@ import path from 'path';
 import DataReaderError from '../../error/DataReaderError';
 import IData from '../../interface/IData';
 
-export type DataReaderReturnType = string | string[];
+export type DataReaderReturnType = string | {};
 
 export default class DataReader implements IData {
 
@@ -76,14 +76,19 @@ export default class DataReader implements IData {
 
     private readMultipleFilesContent(filesList: string[]): string[] {
         const workingDirectory = this.getWorkingDirectory();
-        let filesContent: string[] = [];
+        let filesContent: any = {};
         filesList.forEach( fileName => {
             const filePath = path.join(workingDirectory , fileName);
             const singleFileContent: string = this.readFileContent(filePath);
-            filesContent.push(singleFileContent);
+            const fileId = this.fileIdFromName(fileName);
+            filesContent[fileId] = singleFileContent;
         } );
 
         return filesContent;
+    }
+
+    private fileIdFromName(fileName: string): string {
+        return fileName.slice(0, fileName.lastIndexOf('.'));
     }
 
     private getWorkingDirectory(): string {

@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from '../../../assets/scss/components/UI/Button.module.scss';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type ButtonProps = {
     caption?: any;
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
     classes?: any;
-    icon?: IconName;
+    icon?: JSX.Element;
     iconGroup?: 'fas' | 'fab';
     onClick?: any
 };
@@ -33,7 +31,7 @@ const Button: React.FunctionComponent<ButtonProps> = (props?: ButtonProps): JSX.
                 className={combinedClasses.join(' ')}
                 disabled={props.disabled ? props.disabled : false}
                 onClick={props.onClick && props.onClick}>
-            {props.icon && <FontAwesomeIcon icon={[props.iconGroup, props.icon]} />}
+            {props.icon && props.icon}
             {props.caption && <span>{props.caption}</span>}
         </button>
     );
