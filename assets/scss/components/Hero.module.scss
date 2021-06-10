@@ -72,12 +72,8 @@
             padding: math.div($grid-gutter-width, 4) math.div($grid-gutter-width, 2);
             text-align: justify;
             @include media-breakpoint-down(lg) {
-                max-width: 75%;
                 align-self: center;
                 justify-self: center;
-            }
-
-            @include media-breakpoint-down(sm) {
                 max-width: 90%;
             }
 

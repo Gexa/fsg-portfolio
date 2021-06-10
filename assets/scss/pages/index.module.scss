@@ -35,8 +35,7 @@
 
                 > div.oneMemberInner {
                     background-color: $modal-content-bg;
-                    margin: 0 3rem;
-                    padding-bottom: math.div($grid-gutter-width, 2);
+                    margin: 0.5rem 1rem;
                     cursor: pointer;
                     transition: all 0.2s ease-in-out;
                     &:hover {
@@ -44,6 +43,7 @@
                         box-shadow: 0 0 20px #DDDDDD;
                     }
                     display: flex;
+                    flex-basis: 100%;
 
                     > div {
                         min-width: 30%;
@@ -54,8 +54,21 @@
                         text-align: left;
                     }
 
+                    @include media-breakpoint-down(sm) {
+                        > div {
+                            min-width: 40%;
+                        }
+
+                        > h3 {
+                            font-size: 1.25rem;
+                            padding: 1rem;
+                        }
+                    }
+
                     @include media-breakpoint-up(md) {
                         display: block;
+                        margin: 0 3rem;
+                        padding-bottom: math.div($grid-gutter-width, 2);
                         > div {
                             min-width: auto;
                         }
@@ -75,7 +88,11 @@
                 .memberImage {
                     background-color: $inverse-bg;
                     padding: 0;
-                    margin: 0 0 1rem 0;
+                    margin: 0;
+
+                    @include media-breakpoint-up(lg) {
+                        margin: 0 0 1rem 0;
+                    }
 
                     figcaption {
                         padding: 0.5rem;
