@@ -32,7 +32,7 @@
         margin-bottom: 1rem;
     }
 
-    @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'lg')) {
+    @media all and (min-width: map-get($map: $grid-breakpoints, $key: 'md')) {
         clip-path: url(#headerCurve);
     }
 
@@ -48,16 +48,18 @@
     }
 
     .heroWrapper {
-        height: 40vh;
+        height: auto;
         display: flex;
         justify-content: center;
         align-items: flex-start;
         flex-direction: column;
         position: relative;
-        @include media-breakpoint-up(lg) {
+        padding: 5vh 0;
+
+        @include media-breakpoint-up(md) {
             justify-content: flex-start;
             height: 45vh;
-            padding-top: 5vh
+            padding: 5vh 0 0 0;
         }
 
         * {
@@ -73,6 +75,10 @@
                 max-width: 75%;
                 align-self: center;
                 justify-self: center;
+            }
+
+            @include media-breakpoint-down(sm) {
+                max-width: 90%;
             }
 
             h2 {
